@@ -1,3 +1,4 @@
+using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using Telegram.Bot;
@@ -16,6 +17,21 @@ namespace UrbaBot
         public Task SetupWebhookAsync()
         {
             return _botClient.SetWebhookAsync($"{BotSettings.DomainUrl}/{BotSettings.HookResponse}");
+        }
+
+        public async Task<byte[]> DownloadFile(string fileId)
+        {
+            var file = await _botClient.GetFileAsync(fileId);
+            using (var stream = new MemoryStream())
+            {
+                await _botClient.DownloadFileAsync(file.FilePath, stream);
+                return stream.GetBuffer();
+            }
+        }
+
+        public TelegramBotClient GetClient()
+        {
+            return _botClient;
         }
     }
 }

@@ -4,7 +4,7 @@ namespace UrbaBot
     {
         public const string HookResponse = "api/bot/update";
 
-        private const string NgrokUrl = "https://33e373f0.ngrok.io";
+        private const string NgrokUrl = "https://4828e2d5.ngrok.io";
         private const string PinGeoUrl = "https://pingeo.ru";
 
         public static string DomainUrl
@@ -19,6 +19,6 @@ namespace UrbaBot
             }
         }
 
-        public const string Key = "788292459:AAEPtMAiX4TKbgpBQZMQS_9mArnv_8N2k2w";
+        public const string Key = "831389064:AAHVl6qclWON86MgAO2Ck99g6AFtSqgJMN4";
     }
 }
