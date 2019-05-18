@@ -126,6 +126,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Exceptions\ControllerNotFoundException.cs" />
     <Compile Include="Global.asax.cs" />
+    <Compile Include="Models\HomeIndexModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

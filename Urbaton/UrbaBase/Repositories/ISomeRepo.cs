@@ -1,7 +1,11 @@
-namespace Urbaton.Repositories
+using System.Collections.Generic;
+using UrbaBase.Documents;
+
+namespace UrbaBase.Repositories
 {
     public interface ISomeRepo
     {
-        object Get();
+        IEnumerable<SomeDocument> Get();
+        void Save(SomeDocument document);
     }
 }

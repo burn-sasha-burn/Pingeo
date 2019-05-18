@@ -1,6 +1,5 @@
 ﻿using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
 using System.Web.Routing;
 using log4net.Config;
 
@@ -12,7 +11,6 @@ namespace Front
         {
             XmlConfigurator.Configure();
             IocFactory.Configure();
-            AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }

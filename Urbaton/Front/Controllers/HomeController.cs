@@ -1,5 +1,6 @@
 using System.Web.Mvc;
-using Urbaton.Repositories;
+using Front.Models;
+using UrbaBase.Repositories;
 
 namespace Front.Controllers
 {
@@ -14,9 +15,11 @@ namespace Front.Controllers
 
         public ActionResult Index()
         {
-            var o = _someRepo.Get();
-
-            return View();
+            return View(new HomeIndexModel()
+            {
+                SomeLine = "Hello World!",
+                SomeDocuments = _someRepo.Get()
+            });
         }
     }
 }
