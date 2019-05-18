@@ -25,6 +25,6 @@ export class RTileLayer extends React.Component<IRTileLayerProps> {
     }
 
     public render() {
-        return (<></>);
+        return (<div/>);
     }
 }

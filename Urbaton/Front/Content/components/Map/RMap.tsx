@@ -6,6 +6,7 @@ import styles from './RMap.scss';
 
 interface IRMapProps {
     children?: ReactNode;
+    defaultZoom?: number;
 }
 
 interface IRMapState {
@@ -18,7 +19,7 @@ export class RMap extends React.Component<IRMapProps, IRMapState> {
 
     public state: IRMapState = {
         initialized: false,
-    }
+    };
 
     public constructor(props: IRMapProps) {
         super(props);
@@ -27,7 +28,7 @@ export class RMap extends React.Component<IRMapProps, IRMapState> {
 
     public componentDidMount() {
         if (this.mapRef && this.mapRef.current) {
-            this.map = L.map(this.mapRef.current, {center: {lat: 0, lng: 0}, zoom: 12});
+            this.map = L.map(this.mapRef.current);
             this.setState({initialized: true});
         }
     }
