@@ -1,0 +1,17 @@
+@inherits System.Web.Mvc.WebViewPage
+@using Newtonsoft.Json
+@* @model Front.Models.HomeIndexModel *@
+
+<script>
+    window._PREPARED_INFO_ = @Html.Raw(@JsonConvert.SerializeObject(Model))
+</script>
+
+All is fine
+
+@* @Model.SomeLine *@
+@* @foreach (var someDocument in Model.SomeDocuments) *@
+@* { *@
+@* <div> *@
+@* @someDocument *@
+@* </div> *@
+@* } *@
