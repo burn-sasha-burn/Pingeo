@@ -154,6 +154,8 @@
     <Content Include="configs\webpack\presets\konturRetailUiAssets.js" />
     <Content Include="configs\webpack\presets\konturRetailUiCode.js" />
     <Content Include="configs\webpack\presets\konturRetailUiStyles.js" />
+    <Content Include="configs\webpack\presets\libAssets.js" />
+    <Content Include="configs\webpack\presets\libGlobalStyles.js" />
     <Content Include="configs\webpack\presets\projectAssets.js" />
     <Content Include="configs\webpack\presets\projectCode.js" />
     <Content Include="configs\webpack\presets\projectGlobalStyles.js" />
@@ -162,13 +164,16 @@
     <Content Include="configs\webpack\webpack.base.js" />
     <Content Include="configs\webpack\webpack.dev.js" />
     <Content Include="configs\webpack\webpack.prod.js" />
+    <Content Include="Content\api\gepIpApi.ts" />
+    <Content Include="Content\api\incidentsApi.ts" />
     <Content Include="Content\assets.d.ts" />
     <Content Include="Content\components\App\App.scss" />
     <Content Include="Content\components\App\App.tsx" />
+    <Content Include="Content\components\IncidentMarks\IncidentMarks.tsx" />
+    <Content Include="Content\components\Map\AutoLocation.tsx" />
     <Content Include="Content\components\Map\RMap.scss" />
     <Content Include="Content\components\Map\RMap.tsx" />
     <Content Include="Content\components\Map\RTileLayer.tsx" />
-    <Content Include="Content\containers\AppContainer.tsx" />
     <Content Include="Content\custom.d.ts" />
     <Content Include="Content\dist\2273e3d8ad9264b7daa5bdbf8e6b47f8.png" />
     <Content Include="Content\dist\4f0283c6ce28e888000e978e537a6a56.png" />
@@ -176,6 +181,8 @@
     <Content Include="Content\dist\css\app.css" />
     <Content Include="Content\dist\js\app.js" />
     <Content Include="Content\domain\IGeneralEditInfo.ts" />
+    <Content Include="Content\domain\IIncident.ts" />
+    <Content Include="Content\domain\IPoint.ts" />
     <Content Include="Content\domain\QueryStatus.ts" />
     <Content Include="Content\entries\app.tsx" />
     <Content Include="Content\entries\createAppStore.ts" />
@@ -191,7 +198,11 @@
     <Content Include="Content\Fonts\Kontur-Iconic-eco-webfont.ttf" />
     <Content Include="Content\Fonts\Kontur-Iconic-eco-webfont.woff" />
     <Content Include="Content\Fonts\Kontur-Iconic-eco-webfont.woff2" />
+    <Content Include="Content\store\actions\incidentsActions.ts" />
+    <Content Include="Content\store\reducers\incidentsReducer.ts" />
     <Content Include="Content\store\rootPaths.ts" />
+    <Content Include="Content\store\rootReducer.ts" />
+    <Content Include="Content\store\selectors\incidentsSelectors.ts" />
     <Content Include="Content\Styles\base\fontImports.scss" />
     <Content Include="Content\Styles\base\fonts.scss" />
     <Content Include="Content\Styles\base\icons.scss" />
@@ -233,8 +244,8 @@
     <Compile Include="App_Start\StructureMapControllersFactory.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Exceptions\ControllerNotFoundException.cs" />
     <Compile Include="Controllers\IncidentsController.cs" />
+    <Compile Include="Exceptions\ControllerNotFoundException.cs" />
     <Compile Include="Global.asax.cs" />
     <Compile Include="Models\HomeIndexModel.cs" />
     <Compile Include="Models\IncednetViewModel.cs" />
@@ -249,9 +260,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\api" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UrbaBase\UrbaBase.csproj">
