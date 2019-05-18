@@ -3,13 +3,13 @@ interface IPageInfo {
     title: string;
 }
 
-export type Page = 'incidents' | 'meets';
+export type Page = 'incidents' | 'meetups';
 
 export const incidentsRoute: Page = 'incidents';
-export const myMeetsRoute: Page = 'meets';
+export const meetupsRoute: Page = 'meetups';
 
-export const pages: Page[] = [incidentsRoute, myMeetsRoute];
+export const pages: Page[] = [incidentsRoute, meetupsRoute];
 export const pagesInfo: IPageInfo[] = [
     {page: incidentsRoute, title: 'Все инциденты'},
-    {page: myMeetsRoute, title: 'Мероприятия'},
+    {page: meetupsRoute, title: 'Мероприятия'},
 ];

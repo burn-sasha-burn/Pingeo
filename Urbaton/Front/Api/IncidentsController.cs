@@ -54,7 +54,11 @@ namespace Front.Api
                     {
                         Id = Guid.NewGuid(),
                         Location = new LocationDocument() {Longitude = RandomCoordDiff(0.1f / 2, 53.2035477f), Latitude = RandomCoordDiff(0.1f, 50.2188443f)},
-                        Description = "Рондомоный инцедент " + i
+                        Description = "Рондомоный инцедент " + i,
+                        CreationDate = DateTime.UtcNow,
+                        Creator = new UserDocument {Nick = "Batman"},
+                        CustomText = "have to work it out",
+                        Status = StatusDocument.New
                     }
                 );
             }
