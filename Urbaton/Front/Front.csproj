@@ -157,6 +157,8 @@
     <Content Include="configs\webpack\webpack.prod.js" />
     <Content Include="Content\assets.d.ts" />
     <Content Include="Content\custom.d.ts" />
+    <Content Include="Content\dist\css\app.css" />
+    <Content Include="Content\dist\js\app.js" />
     <Content Include="Content\domain\IGeneralEditInfo.ts" />
     <Content Include="Content\Fonts\Kontur-Iconic-eco-20px.eot" />
     <Content Include="Content\Fonts\Kontur-Iconic-eco-20px.otf" />
@@ -227,7 +229,6 @@
     <Folder Include="Content\api" />
     <Folder Include="Content\components" />
     <Folder Include="Content\containers" />
-    <Folder Include="Content\dist" />
     <Folder Include="Content\entries" />
     <Folder Include="Content\store\actions" />
     <Folder Include="Content\store\reducers" />
