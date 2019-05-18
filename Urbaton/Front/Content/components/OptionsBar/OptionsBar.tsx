@@ -6,6 +6,8 @@ import {ControlPosition} from 'leaflet';
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators, Dispatch} from 'redux';
+import DropdownMenu from 'retail-ui/components/DropdownMenu/DropdownMenu';
+import MenuItem from 'retail-ui/components/MenuItem/MenuItem';
 import {pathInfoSelector} from 'store/selectors/routeSelectors';
 import {incidentsRoute, Page, pagesInfo} from 'utils/constants/routesConstants';
 import {buildPageRoute} from 'utils/routeBuilders';
@@ -45,27 +47,38 @@ export class OptionsBarComponent extends React.Component<IOptionsBarProps, IOpti
 
         return (
             <div className={cn(styles.root, styles[position] || styles.topright, opened && styles.opened)}>
-                <button className={styles.menuButton} onClick={this.toggle}>
-                    <div className={styles.open}><MenuIcon/></div>
-                    <div className={styles.close}><CloseIcon/></div>
-                </button>
-                <ul className={cn(styles.menu, styles[position] || styles.topright)}>
+                <DropdownMenu
+                    caption={
+                        <button className={styles.menuButton}>
+                            <div className={styles.open}><MenuIcon size={32}/></div>
+                            <div className={styles.close}><CloseIcon size={26}/></div>
+                        </button>
+                    }
+                    onOpen={this.handleMenuOpen}
+                    onClose={this.handleMenuClose}
+                    disableAnimations={false}
+                    menuWidth="200px"
+                >
                     {pagesInfo.map(({page, title}) => (
-                        <li key={page} className={cn(styles.item, page === selectedPage && styles.selected)}>
-                            <button onClick={() => this.selectPage(page)}>{title}</button>
-                        </li>
+                        <MenuItem
+                            key={page}
+                            onClick={() => this.selectPage(page)}
+                            disabled={selectedPage === page}
+                        >
+                            <span className={styles.pageName}>{title}</span>
+                        </MenuItem>
                     ))}
-                </ul>
+                </DropdownMenu>
             </div>
         );
     }
 
-    private readonly toggle = () => this.setState(({opened}) => ({opened: !opened}));
+    private readonly handleMenuOpen = () => this.setState({opened: true});
+    private readonly handleMenuClose = () => this.setState({opened: false});
     private readonly selectPage = (page: Page) => {
         if (this.props.selectedPage !== page) {
             this.props.onPageSelect(buildPageRoute(page));
         }
-        this.setState({opened: false});
     }
 
     private readonly handleEscKey = (e: KeyboardEvent) => {

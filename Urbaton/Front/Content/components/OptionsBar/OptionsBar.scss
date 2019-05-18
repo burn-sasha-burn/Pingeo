@@ -31,13 +31,9 @@ $menuButtonSize: 40px;
   width: $menuButtonSize;
   height: $menuButtonSize;
   border-radius: $menuButtonSize;
-  text-align: center;
-  font-size: 28px;
-  padding-bottom: 7px;
   position: relative;
   overflow: hidden;
   z-index: 100;
-  transition: border-radius 0.45s ease-in-out;
 }
 
 .menuButton {
@@ -47,25 +43,24 @@ $menuButtonSize: 40px;
   }
   .open {
     position: absolute;
-    left: 6px;
-    top: 3px;
+    left: 4px;
+    top: 0;
   }
   .close {
     position: absolute;
-    left: 9px+$menuButtonSize;
-    top: 7px;
+    left: 7px+$menuButtonSize;
+    top: 3px;
     font-size: 21px;
   }
 }
 
 .root.opened {
   .menuButton {
-    border-radius: 0;
     .open {
-      left: 6px - $menuButtonSize;
+      left: 4px - $menuButtonSize;
     }
     .close {
-      left: 9px;
+      left: 7px;
     }
   }
 }
@@ -98,21 +93,6 @@ $menuButtonSize: 40px;
   }
 }
 
-.item {
-  button {
-    @include cleanButton();
-    @include clickable();
-    width: 100%;
-    padding: 0 $menuButtonSize;
-    white-space: nowrap;
-    line-height: $menuButtonSize;
-  }
-}
-
-.item.selected {
-  button {
-    background-color: $lightGrey;
-    font-weight: 600;
-    color: $brand3;
-  }
+.pageName {
+  font-size: $fontSizeM;
 }
