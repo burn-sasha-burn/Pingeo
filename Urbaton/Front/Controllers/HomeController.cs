@@ -1,24 +1,25 @@
 using System.Web.Mvc;
 using Front.Models;
-using UrbaBase.Repositories;
+using UrbaBot;
 
 namespace Front.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ISomeRepo _someRepo;
+        private readonly ITelegramBotProvider _telegramBotProvider;
 
-        public HomeController(ISomeRepo someRepo)
+        public HomeController(ITelegramBotProvider telegramBotProvider)
         {
-            _someRepo = someRepo;
+            _telegramBotProvider = telegramBotProvider;
         }
 
         public ActionResult Index()
         {
-            return View(new HomeIndexModel()
+//            _telegramBotProvider.Provide().GetBotClientAsync();
+
+            return View(new HomeIndexModel
             {
-                SomeLine = "Hello World!",
-                SomeDocuments = _someRepo.Get()
+                SomeLine = "Hello World!"
             });
         }
     }

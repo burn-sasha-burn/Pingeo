@@ -1,19 +1,19 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using Telegram.Bot;
 
-namespace TelegrammCoreBot.Models
+namespace UrbaBot
 {
-    public class Bot
+    public class TelegramBot
     {
         private static TelegramBotClient botClient;
         private static List<Command> commandsList;
 
         public static IReadOnlyList<Command> Commands => commandsList.AsReadOnly();
 
-        public static TelegramBotClient GetBotClientAsync()
+        public TelegramBotClient GetBotClientAsync()
         {
             if (botClient != null)
             {
@@ -29,14 +29,14 @@ namespace TelegrammCoreBot.Models
             {
                 Proxy = new WebProxy
                 {
-                    Address = new Uri($"http://95.85.25.124:4444"),
+                    Address = new Uri("http://95.85.25.124:4444"),
                     Credentials = new NetworkCredential(string.Empty, string.Empty)
                 },
                 UseProxy = true
             });
-            
-            botClient = new TelegramBotClient(AppSettings.Key, client);
-            botClient.SetWebhookAsync("https://fe1c0141.ngrok.io/api/message/update").GetAwaiter().GetResult();
+
+            botClient = new TelegramBotClient(BotSettings.Key, client);
+            botClient.SetWebhookAsync($"{BotSettings.Ngrok}/{BotSettings.HookResponse}").GetAwaiter().GetResult();
             return botClient;
         }
     }

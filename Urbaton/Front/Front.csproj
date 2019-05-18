@@ -55,8 +55,8 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Text, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587">
       <HintPath>..\packages\ServiceStack.Text.5.5.0\lib\net45\ServiceStack.Text.dll</HintPath>
@@ -129,6 +129,10 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Telegram.Bot, Version=14.11.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Telegram.Bot.14.11.0\lib\net45\Telegram.Bot.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
@@ -238,6 +242,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\BotController.cs" />
     <Compile Include="App_Start\IocFactory.cs" />
     <Compile Include="ActionResults\ServiceStackJsonResult.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -265,6 +270,10 @@
     <ProjectReference Include="..\UrbaBase\UrbaBase.csproj">
       <Project>{e70ed661-9a1b-40fd-af59-bb7d28c66c2f}</Project>
       <Name>UrbaBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UrbaBot\UrbaBot.csproj">
+      <Project>{233baffc-8773-4f29-95bb-2ddb69e26308}</Project>
+      <Name>UrbaBot</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

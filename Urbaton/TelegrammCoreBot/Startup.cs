@@ -44,7 +44,7 @@ namespace TelegrammCoreBot
             app.UseHttpsRedirection();
             app.UseMvc();
 
-            Bot.GetBotClientAsync().Wait();
+            Bot.GetBotClientAsync();
         }
     }
 }
