@@ -57,6 +57,10 @@
       <HintPath>..\packages\MongoDB.Driver.Core.2.8.1\lib\net452\MongoDB.Driver.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="StructureMap, Version=4.7.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\StructureMap.4.7.1\lib\net45\StructureMap.dll</HintPath>
       <Private>True</Private>
@@ -79,7 +83,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Documents\IncidentDocument.cs" />
-    <Compile Include="Documents\SomeDocument.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\LocationDocument.cs" />
     <Compile Include="Models\StatusDocument.cs" />
@@ -95,8 +98,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IIncidentRepo.cs" />
     <Compile Include="Repositories\IncidentRepo.cs" />
-    <Compile Include="Repositories\ISomeRepo.cs" />
-    <Compile Include="Repositories\SomeRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

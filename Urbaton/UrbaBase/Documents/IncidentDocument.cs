@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 using UrbaBase.Models;
 using UrbaBase.Mongo;
 
@@ -13,23 +11,32 @@ namespace UrbaBase.Documents
     public class IncidentDocument
     {
         [BsonId]
+        [JsonProperty("id")]
         public Guid Id { get; set; }
 
+        [JsonProperty("description")]
         public string Description { get; set; }
 
+        [JsonProperty("location")]
         public LocationDocument Location { get; set; }
 
+        [JsonProperty("status")]
         public StatusDocument Status { get; set; }
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
+        [JsonProperty("creationDate")]
         public DateTime CreationDate { get; set; }
 
+        [JsonProperty("creator")]
         public UserDocument Creator { get; set; }
 
+        [JsonProperty("images")]
         public IEnumerable<Image> Images { get; set; }
 
+        [JsonProperty("meetupUsers")]
         public IEnumerable<UserDocument> MeetupUsers { get; set; }
 
+        [JsonProperty("customText")]
         public string CustomText { get; set; }
     }
 }

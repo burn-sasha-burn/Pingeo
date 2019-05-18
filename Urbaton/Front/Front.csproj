@@ -238,17 +238,18 @@
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
     <Content Include="log4net.config" />
-    <Content Include="Views\IncidentsPage\Index.cshtml" />
+    <Content Include="Views\Incidents\Index.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\BotController.cs" />
+    <Compile Include="Api\IncidentsController.cs" />
     <Compile Include="App_Start\IocFactory.cs" />
     <Compile Include="ActionResults\ServiceStackJsonResult.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\StructureMapControllersFactory.cs" />
+    <Compile Include="App_Start\StructureMapControllerActivator.cs" />
+    <Compile Include="App_Start\StructureMapControllerFactory.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\IncidentsPageController.cs" />
     <Compile Include="Controllers\IncidentsController.cs" />
     <Compile Include="Exceptions\ControllerNotFoundException.cs" />
     <Compile Include="Global.asax.cs" />
@@ -272,9 +273,6 @@
       <Project>{233baffc-8773-4f29-95bb-2ddb69e26308}</Project>
       <Name>UrbaBot</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

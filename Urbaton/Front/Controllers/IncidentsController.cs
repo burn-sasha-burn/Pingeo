@@ -1,85 +1,21 @@
-using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
-using Front.ActionResults;
-using UrbaBase.Documents;
-using UrbaBase.Models;
-using UrbaBase.Repositories;
+using JetBrains.Annotations;
 
 namespace Front.Controllers
 {
     public class IncidentsController : Controller
     {
-        private readonly IIncidentRepo _incidentRepo;
-
-        [HttpGet]
-        [Route("Api/Incidents/Get")]
-        public ActionResult Get()
+        public ActionResult Index([CanBeNull] string id)
         {
-            var incidents = new List<IncidentDocument>
-            {
-                new IncidentDocument
-                {
-                    Id = new Guid(),
-                    CreationDate = DateTime.UtcNow,
-                    Creator = new UserDocument { Nick = "Superman" },
-                    CustomText = "fly like a red bullit",
-                    Location = new LocationDocument { Latitude = 21d, Longitude = 22d },
-                    Description = "garbage on fire",
-                    Status = StatusDocument.New
-                },
-                new IncidentDocument()
-                {
-                    Id = new Guid(),
-                    CreationDate = DateTime.UtcNow,
-                    Creator = new UserDocument { Nick = "Batman" },
-                    CustomText = "have to work it out",
-                    Location = new LocationDocument { Latitude = 53d, Longitude = 50d },
-                    Description = "Здесь стройка. Просто стройкахаахахахахахахха",
-                    Status = StatusDocument.New
-                }
-            };
-
-            var random = new Random();
-            for (var i = 0; i < 150; i++)
-            {
-                incidents.Add(new IncidentDocument()
-                    {
-                        Id = Guid.NewGuid(),
-                        Location = new LocationDocument() {Longitude = RandomCoordDiff(0.1f / 2, 53.2035477f), Latitude = RandomCoordDiff(0.1f, 50.2188443f)},
-                        Description = "Рондомоный инцедент " + i
-                    }
-                );
-            }
-
-            return new ServiceStackJsonResult() {Data = incidents};
+            return Redirect("/Incidents");
         }
 
-        [HttpGet]
-        [Route("Api/Incidents/Save")]
-        public ActionResult Save()
+        [Route("Incidents/{id?}")]
+        [Route("MyIncidents/{id?}")]
+        [Route("MyMeets/{id?}")]
+        public ActionResult Incidents([CanBeNull] string id)
         {
-            var incident = new IncidentDocument
-                {
-                    Id = new Guid(),
-                    CreationDate = DateTime.UtcNow,
-                    Creator = new UserDocument { Nick = "Superman" },
-                    CustomText = "fly like a red bullit",
-                    Location = new LocationDocument { Latitude = 21d, Longitude = 22d },
-                    Description = "garbage on fire",
-                    Status = StatusDocument.New
-                };
-
-            var result = _incidentRepo.Save(incident);
-
-            return new ServiceStackJsonResult() { Data = result };
-        }
-
-        private readonly Random rand = new Random();
-
-        private float RandomCoordDiff(float diff, float coord)
-        {
-            return (float) ((rand.NextDouble() - 0.5) * diff) + coord;
+            return View("Index");
         }
     }
 }

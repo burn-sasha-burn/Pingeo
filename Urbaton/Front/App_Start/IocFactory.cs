@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Web.Http;
+using System.Web.Http.Dispatcher;
+using System.Web.Mvc;
 using JetBrains.Annotations;
 using StructureMap;
 using StructureMap.Pipeline;
@@ -10,17 +12,17 @@ namespace Front
         [NotNull]
         private static readonly object @lock = new object();
 
-        private static Container container;
+        private static Container _container;
 
         [NotNull]
         public static Container GetContainer()
         {
-            if (container == null)
+            if (_container == null)
                 lock (@lock)
                 {
-                    if (container == null)
+                    if (_container == null)
                     {
-                        if (container == null)
+                        if (_container == null)
                         {
                             var result = new Container();
                             result.Configure(r => r.Scan(s =>
@@ -29,19 +31,21 @@ namespace Front
                                 s.RegisterConcreteTypesAgainstTheFirstInterface().OnAddedPluginTypes(c => c.LifecycleIs(Lifecycles.Singleton));
                                 s.LookForRegistries();
                             }));
-                            container = result;
+                            _container = result;
                         }
                     }
                 }
 
-            return container;
+            return _container;
         }
 
         public static T GetInstance<T>() => GetContainer().GetInstance<T>();
 
         public static void Configure()
         {
-            ControllerBuilder.Current.SetControllerFactory(new StructureMapControllersFactory(GetContainer()));
+            var container = GetContainer();
+            ControllerBuilder.Current.SetControllerFactory(new StructureMapControllerFactory(container));
+            GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerActivator), new StructureMapControllerActivator(container));
         }
     }
 }

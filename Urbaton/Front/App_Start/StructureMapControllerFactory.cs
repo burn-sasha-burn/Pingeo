@@ -6,11 +6,11 @@ using StructureMap;
 
 namespace Front
 {
-    public class StructureMapControllersFactory : DefaultControllerFactory
+    public class StructureMapControllerFactory : DefaultControllerFactory
     {
         private readonly Container _container;
 
-        public StructureMapControllersFactory(Container container)
+        public StructureMapControllerFactory(Container container)
         {
             _container = container;
         }

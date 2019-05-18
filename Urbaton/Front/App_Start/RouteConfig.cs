@@ -13,7 +13,7 @@ namespace Front
             routes.MapRoute(
                 name: "default",
                 url: "{controller}/{action}/{id}",
-                defaults: new {controller = "IncidentsPage", action = "Index", id = UrlParameter.Optional}
+                defaults: new {controller = "Incidents", action = "Index", id = UrlParameter.Optional}
             );
         }
     }
