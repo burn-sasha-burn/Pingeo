@@ -129,11 +129,13 @@
 }
 
 @mixin clickable($hoverColor: $lightGrey , $activeColor: $br) {
-  &:enabled:hover,
-  &:enabled:focus {
+  &:focus {
     background-color: $lightGrey;
   }
-  &:enabled:active {
+  &:enabled:hover {
     background-color: $activeColor;
+  }
+  &:enabled:active {
+    background-color: $lightGrey;
   }
 }

@@ -1,6 +1,15 @@
-export type Page = 'incidents' | 'myIncidents' | 'myMeets';
+interface IPageInfo {
+    page: Page;
+    title: string;
+}
+
+export type Page = 'incidents' | 'meets';
 
 export const incidentsRoute: Page = 'incidents';
-export const myIncidentsRoute: Page = 'myIncidents';
-export const myMeetsRoute: Page = 'myMeets';
-export const pages: Page[] = [incidentsRoute, myIncidentsRoute, myMeetsRoute];
+export const myMeetsRoute: Page = 'meets';
+
+export const pages: Page[] = [incidentsRoute, myMeetsRoute];
+export const pagesInfo: IPageInfo[] = [
+    {page: incidentsRoute, title: 'Все инциденты'},
+    {page: myMeetsRoute, title: 'Мероприятия'},
+];

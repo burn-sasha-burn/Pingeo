@@ -1,0 +1,118 @@
+@import "Styles/utils/defaults";
+@import "Styles/utils/mixins";
+@import "Styles/utils/colors";
+@import "Styles/utils/zIndexes";
+
+$menuButtonSize: 40px;
+
+.root {
+  position: fixed;
+  z-index: $buttonsBarZIndex;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.topleft {
+  top: 0;
+  left: 0;
+}
+
+.topright {
+  right: 0;
+  top: 0;
+}
+
+.menuButton {
+  @include cleanButton();
+  @include clickable();
+  background-color: $bg;
+  width: $menuButtonSize;
+  height: $menuButtonSize;
+  border-radius: $menuButtonSize;
+  text-align: center;
+  font-size: 28px;
+  padding-bottom: 7px;
+  position: relative;
+  overflow: hidden;
+  z-index: 100;
+  transition: border-radius 0.45s ease-in-out;
+}
+
+.menuButton {
+  .open,
+  .close {
+    transition: left 0.3s ease-in-out;
+  }
+  .open {
+    position: absolute;
+    left: 6px;
+    top: 3px;
+  }
+  .close {
+    position: absolute;
+    left: 9px+$menuButtonSize;
+    top: 7px;
+    font-size: 21px;
+  }
+}
+
+.root.opened {
+  .menuButton {
+    border-radius: 0;
+    .open {
+      left: 6px - $menuButtonSize;
+    }
+    .close {
+      left: 9px;
+    }
+  }
+}
+
+.menu {
+  padding: ($menuButtonSize+8px) 0 8px;
+  position: absolute;
+  transform: scale(0);
+  transform-origin: 100% 0;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  background-color: $bg;
+  z-index: 0;
+}
+
+.menu.topleft {
+  top: 10px;
+  left: 10px;
+}
+
+.menu.topright {
+  top: 10px;
+  right: 10px;
+}
+
+.root.opened {
+  .menu {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.item {
+  button {
+    @include cleanButton();
+    @include clickable();
+    width: 100%;
+    padding: 0 $menuButtonSize;
+    white-space: nowrap;
+    line-height: $menuButtonSize;
+  }
+}
+
+.item.selected {
+  button {
+    background-color: $lightGrey;
+    font-weight: 600;
+    color: $brand3;
+  }
+}

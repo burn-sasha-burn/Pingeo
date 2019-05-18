@@ -1,8 +1,8 @@
 import {Location} from 'history';
-import {incidentsRoute, myIncidentsRoute, myMeetsRoute, Page, pages} from 'utils/constants/routesConstants';
+import {incidentsRoute, myMeetsRoute, Page, pages} from 'utils/constants/routesConstants';
 
+export const buildPageRoute = (page: Page) => `/${page}`;
 export const buildIncidentsRoute = () => `/${incidentsRoute}`;
-export const buildMyIncidentsRoute = () => `/${myIncidentsRoute}`;
 export const buildMyMeetsRoute = () => `/${myMeetsRoute}`;
 
 export function buildSelectedIncidentRoute(location: Location, incidentId: string): string {
