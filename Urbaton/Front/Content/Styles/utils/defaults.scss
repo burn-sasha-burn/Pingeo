@@ -1,0 +1,37 @@
+$fontSize: 14px;
+$fontSizeM: 16px;
+$fontSizeL: 20px;
+$fontSizeEL: 22px;
+
+$lineHeight: 20px;
+$lineHeightM: 22px;
+$lineHeightL: 26px;
+$lineHeightEL: 30px;
+
+$semilight: 300;
+$normal: 400;
+$semibold: 600;
+
+//$multiCustomerIndent: 36px;
+//$minDeviceW: 320px;
+//$maxDeviceW: 1024px;
+//$deviceP: 15px;
+//$defaultBorderRadius: 2.1px;
+
+$maxContainerWidth: 1000px;
+$sideOffsets: 10px;
+
+$mainMenuHeightDesktop: 61px;
+$mainMenuHeightMobile: 45px;
+$footerHeightDesktop: 123px;
+$footerHeightMobile: 123px;
+
+$topKonturBlockHeight: 50px;
+$headerHeight: 50px;
+
+$minContentHeight: calc(100vh - #{$topKonturBlockHeight} - #{$headerHeight} - #{$footerHeightDesktop});
+
+$sizeXs: 767px;
+$sizeSm: 991px;
+
+$retailUiComponentHeight: 34px;

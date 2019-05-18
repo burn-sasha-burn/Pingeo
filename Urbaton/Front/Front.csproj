@@ -54,8 +54,21 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="mscorlib" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587">
+      <HintPath>..\packages\ServiceStack.Text.5.5.0\lib\net45\ServiceStack.Text.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
+      <HintPath>..\packages\System.Memory.4.5.2\lib\netstandard2.0\System.Memory.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="StructureMap, Version=4.7.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\StructureMap.4.7.1\lib\net45\StructureMap.dll</HintPath>
@@ -65,6 +78,17 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading" />
+    <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -112,21 +136,95 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".editorconfig" />
+    <Content Include=".stylelintignore" />
+    <Content Include=".stylelintrc" />
+    <Content Include="configs\babel\babel.config.js" />
+    <Content Include="configs\postcss\postcss.config.js" />
+    <Content Include="configs\tslint\tslint.json" />
+    <Content Include="configs\webpack\loaders\babelLoader.js" />
+    <Content Include="configs\webpack\loaders\cssExtractLoader.js" />
+    <Content Include="configs\webpack\loaders\cssLoader.js" />
+    <Content Include="configs\webpack\loaders\fileLoader.js" />
+    <Content Include="configs\webpack\loaders\lessLoader.js" />
+    <Content Include="configs\webpack\loaders\postcssLoader.js" />
+    <Content Include="configs\webpack\loaders\sassLoader.js" />
+    <Content Include="configs\webpack\loaders\tsLoader.js" />
+    <Content Include="configs\webpack\plugins\cssExtractPlugin.js" />
+    <Content Include="configs\webpack\presets\konturRetailUiAssets.js" />
+    <Content Include="configs\webpack\presets\konturRetailUiCode.js" />
+    <Content Include="configs\webpack\presets\konturRetailUiStyles.js" />
+    <Content Include="configs\webpack\presets\projectAssets.js" />
+    <Content Include="configs\webpack\presets\projectCode.js" />
+    <Content Include="configs\webpack\presets\projectGlobalStyles.js" />
+    <Content Include="configs\webpack\presets\projectModulesStyles.js" />
+    <Content Include="configs\webpack\presets\reactIconsStyles.js" />
+    <Content Include="configs\webpack\webpack.base.js" />
+    <Content Include="configs\webpack\webpack.dev.js" />
+    <Content Include="configs\webpack\webpack.prod.js" />
+    <Content Include="Content\assets.d.ts" />
+    <Content Include="Content\custom.d.ts" />
+    <Content Include="Content\dist\css\app.css" />
+    <Content Include="Content\dist\js\app.js" />
+    <Content Include="Content\domain\IGeneralEditInfo.ts" />
+    <Content Include="Content\Fonts\Kontur-Iconic-eco-20px.eot" />
+    <Content Include="Content\Fonts\Kontur-Iconic-eco-20px.otf" />
+    <Content Include="Content\Fonts\Kontur-Iconic-eco-20px.svg" />
+    <Content Include="Content\Fonts\Kontur-Iconic-eco-20px.ttf" />
+    <Content Include="Content\Fonts\Kontur-Iconic-eco-20px.woff" />
+    <Content Include="Content\Fonts\Kontur-Iconic-eco-20px.woff2" />
+    <Content Include="Content\Fonts\Kontur-Iconic-eco-webfont.eot" />
+    <Content Include="Content\Fonts\Kontur-Iconic-eco-webfont.otf" />
+    <Content Include="Content\Fonts\Kontur-Iconic-eco-webfont.svg" />
+    <Content Include="Content\Fonts\Kontur-Iconic-eco-webfont.ttf" />
+    <Content Include="Content\Fonts\Kontur-Iconic-eco-webfont.woff" />
+    <Content Include="Content\Fonts\Kontur-Iconic-eco-webfont.woff2" />
+    <Content Include="Content\store\rootPaths.ts" />
+    <Content Include="Content\Styles\base\fontImports.scss" />
+    <Content Include="Content\Styles\base\fonts.scss" />
+    <Content Include="Content\Styles\base\icons.scss" />
+    <Content Include="Content\Styles\base\reset.scss" />
+    <Content Include="Content\Styles\layout\layoutBase.scss" />
+    <Content Include="Content\Styles\utils\colors.scss" />
+    <Content Include="Content\Styles\utils\defaults.scss" />
+    <Content Include="Content\Styles\utils\mixins.scss" />
+    <Content Include="Content\Styles\utils\zIndexes.scss" />
+    <Content Include="Content\utils\apiUtils.ts" />
+    <Content Include="Content\utils\deepGetSet.ts" />
+    <Content Include="Content\utils\getWordForm.ts" />
+    <Content Include="Content\utils\injectExternalStyles.ts" />
+    <Content Include="Content\utils\isArrayEquals.ts" />
+    <Content Include="Content\utils\retailUi\MenuItemHandlersCache.ts" />
+    <Content Include="Content\utils\store\actionTypes.ts" />
+    <Content Include="Content\utils\store\createByIdActions.ts" />
+    <Content Include="Content\utils\store\createByIdReducer.ts" />
+    <Content Include="Content\utils\store\createEditActions.ts" />
+    <Content Include="Content\utils\store\createSimpleSaveReducer.ts" />
+    <Content Include="Content\utils\typeUtils.ts" />
+    <Content Include="Content\utils\urlUtils.ts" />
+    <Content Include="Content\utils\wrapToArray.ts" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="package-lock.json" />
+    <Content Include="package.json" />
+    <Content Include="tsconfig.json" />
     <Content Include="log4net.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\IocFactory.cs" />
+    <Compile Include="ActionResults\ServiceStackJsonResult.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructureMapControllersFactory.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Exceptions\ControllerNotFoundException.cs" />
+    <Compile Include="Controllers\IncidentsController.cs" />
     <Compile Include="Global.asax.cs" />
     <Compile Include="Models\HomeIndexModel.cs" />
+    <Compile Include="Models\IncednetViewModel.cs" />
+    <Compile Include="Models\PointViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +235,17 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\api" />
+    <Folder Include="Content\components" />
+    <Folder Include="Content\containers" />
+    <Folder Include="Content\entries" />
+    <Folder Include="Content\store\actions" />
+    <Folder Include="Content\store\reducers" />
+    <Folder Include="Content\store\rootReducers" />
+    <Folder Include="Content\store\selectors" />
+    <Folder Include="Content\utils\domain" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UrbaBase\UrbaBase.csproj">
@@ -175,7 +284,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

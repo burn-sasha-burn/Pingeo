@@ -1,17 +1,17 @@
 @inherits System.Web.Mvc.WebViewPage
-@using Newtonsoft.Json
-@* @model Front.Models.HomeIndexModel *@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
 
-<script>
-    window._PREPARED_INFO_ = @Html.Raw(@JsonConvert.SerializeObject(Model))
-</script>
-
-All is fine
-
-@* @Model.SomeLine *@
-@* @foreach (var someDocument in Model.SomeDocuments) *@
-@* { *@
-@* <div> *@
-@* @someDocument *@
-@* </div> *@
-@* } *@
+    <link rel="stylesheet" href="/Content/dist/css/app.css"/>
+</head>
+<body>
+<div id="root">
+    React should mount here
+</div>
+<script src="/Content/dist/js/app.js"></script>
+</body>
+</html>
