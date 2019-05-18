@@ -41,7 +41,7 @@ class IncidentMarksComponent extends React.PureComponent<IIncidentMarkersProps> 
                 {values.map((incident) => (
                     <LFireMarker
                         key={incident.id}
-                        position={incident.coordinate}
+                        position={incident.location}
                         onClick={this.markerClicksCache.getHandler(incident.id, incident)}
                         map={map}
                     />

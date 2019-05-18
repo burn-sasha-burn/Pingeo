@@ -23,7 +23,7 @@ export function IncidentInfo({incident, onClose}: IIncidentInfoProps) {
                 </button>
             </div>
             <p>
-                Место: <Coordinate {...incident.coordinate}/>
+                Место: <Coordinate {...incident.location}/>
             </p>
             <br/>
             <p>

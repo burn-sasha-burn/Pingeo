@@ -28,7 +28,7 @@ namespace Front.Api
             {
                 new IncidentDocument
                 {
-                    Id = new Guid(),
+                    Id = Guid.NewGuid(),
                     CreationDate = DateTime.UtcNow,
                     Creator = new UserDocument {Nick = "Superman"},
                     CustomText = "fly like a red bullit",
@@ -38,7 +38,7 @@ namespace Front.Api
                 },
                 new IncidentDocument()
                 {
-                    Id = new Guid(),
+                    Id = Guid.NewGuid(),
                     CreationDate = DateTime.UtcNow,
                     Creator = new UserDocument {Nick = "Batman"},
                     CustomText = "have to work it out",

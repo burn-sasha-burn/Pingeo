@@ -16,6 +16,7 @@ export function buildCurrentPageRoute(location: Location): string {
 
 export function parsePath(path: string = ''): { page: Page, incident: string } {
     const [, page, incident] = location.pathname.split('/');
-    const selectedPage = pages.includes(page.toLowerCase() as Page) ? page as Page : incidentsRoute;
+    const inLowerCase = page.toLowerCase();
+    const selectedPage = pages.includes(inLowerCase as Page) ? inLowerCase as Page : incidentsRoute;
     return {page: selectedPage, incident: incident || null};
 }
