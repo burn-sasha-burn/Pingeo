@@ -1,5 +1,7 @@
 ﻿using System.Web;
 using System.Web.Http;
+using System.Web.Http.Dispatcher;
+using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace Front
@@ -8,9 +10,13 @@ namespace Front
     {
         protected void Application_Start()
         {
-            IocFactory.Configure();
+            var container = IocFactory.GetContainer();
+
+            ControllerBuilder.Current.SetControllerFactory(new StructureMapControllerFactory(container));
+            GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerActivator), new StructureMapControllerActivator(container));
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            TelegramBotConfig.Configure(container);
         }
     }
 }
