@@ -1,4 +1,8 @@
+@import "Styles/utils/zIndexes";
+
 .map {
   width: 100%;
   height: 100%;
+  position: relative;
+  z-index: $mapZIndex;
 }

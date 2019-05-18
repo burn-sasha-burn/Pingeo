@@ -3,6 +3,8 @@ import {IncidentMarkers} from 'components/IncidentMarks/IncidentMarkers';
 import {AutoLocation} from 'components/Map/AutoLocation';
 import {LMap} from 'components/Map/LMap';
 import {LTileLayer} from 'components/Map/LTileLayer';
+import {LZoomControl} from 'components/Map/LZoomControl';
+import {OptionsBar} from 'components/OptionsBar/OptionsBar';
 import * as React from 'react';
 import {globeLayerAttribution, globeLayerUrlTemplate} from 'utils/constants/mapLayers';
 import styles from './App.scss';
@@ -20,8 +22,10 @@ export class App extends React.Component {
                             attribution: globeLayerAttribution,
                         }}
                     />
+                    <LZoomControl position="topleft"/>
                     <IncidentMarkers/>
                 </LMap>
+                <OptionsBar/>
                 <IncidentInfoBackplate/>
             </div>
         );

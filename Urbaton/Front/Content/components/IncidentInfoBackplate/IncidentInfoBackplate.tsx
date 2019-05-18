@@ -5,7 +5,7 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators, Dispatch} from 'redux';
 import {deselectIncident as deselectIncidentAction} from 'store/actions/selectedIncidentActions';
-import {selectedIncidentSelector} from 'store/selectors/selectedIncidentInfoSelectors';
+import {selectedIncidentSelector} from 'store/selectors/selectedIncidentSelector';
 import styles from './IncidentInfoBackplate.scss';
 
 interface IIncidentInfoBackplateProps {
