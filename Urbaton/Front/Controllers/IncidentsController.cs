@@ -17,13 +17,13 @@ namespace Front.Controllers
                 new IncidentViewModel()
                 {
                     id = Guid.NewGuid(),
-                    coordinate = new PointViewModel() {lat = 55.123f, lng = 55.251f},
+                    coordinate = new PointViewModel() {lat = 53.2035477f, lng = 50.1448443f},
                     description = "Incident 1"
                 },
                 new IncidentViewModel()
                 {
                     id = Guid.NewGuid(),
-                    coordinate = new PointViewModel() {lat = 22.123f, lng = 55.251f},
+                    coordinate = new PointViewModel() {lat = 53.2065277f, lng = 50.1498443f},
                     description = "Incident 2"
                 }
             };
