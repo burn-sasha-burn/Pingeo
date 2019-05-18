@@ -3,10 +3,9 @@ import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 
 export type GeneralThunkAction<ReturnType> = ThunkAction<ReturnType, IGeneralObject, undefined, Action>;
 export type GeneralThunkDispatch = ThunkDispatch<IGeneralObject, undefined, Action>;
+export type GeneralGetState = () => IGeneralObject;
 
 export type PayloadedAction<P> = AnyAction & { payload: P };
-
-export type IGeneralGetState = () => IGeneralObject;
 
 /**
  * Redux behaviour changed by middleware, so overloads here

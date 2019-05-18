@@ -163,10 +163,22 @@
     <Content Include="configs\webpack\webpack.dev.js" />
     <Content Include="configs\webpack\webpack.prod.js" />
     <Content Include="Content\assets.d.ts" />
+    <Content Include="Content\components\App\App.scss" />
+    <Content Include="Content\components\App\App.tsx" />
+    <Content Include="Content\components\Map\RMap.scss" />
+    <Content Include="Content\components\Map\RMap.tsx" />
+    <Content Include="Content\components\Map\RTileLayer.tsx" />
+    <Content Include="Content\containers\AppContainer.tsx" />
     <Content Include="Content\custom.d.ts" />
+    <Content Include="Content\dist\2273e3d8ad9264b7daa5bdbf8e6b47f8.png" />
+    <Content Include="Content\dist\4f0283c6ce28e888000e978e537a6a56.png" />
+    <Content Include="Content\dist\a6137456ed160d7606981aa57c559898.png" />
     <Content Include="Content\dist\css\app.css" />
     <Content Include="Content\dist\js\app.js" />
     <Content Include="Content\domain\IGeneralEditInfo.ts" />
+    <Content Include="Content\domain\QueryStatus.ts" />
+    <Content Include="Content\entries\app.tsx" />
+    <Content Include="Content\entries\createAppStore.ts" />
     <Content Include="Content\Fonts\Kontur-Iconic-eco-20px.eot" />
     <Content Include="Content\Fonts\Kontur-Iconic-eco-20px.otf" />
     <Content Include="Content\Fonts\Kontur-Iconic-eco-20px.svg" />
@@ -184,12 +196,14 @@
     <Content Include="Content\Styles\base\fonts.scss" />
     <Content Include="Content\Styles\base\icons.scss" />
     <Content Include="Content\Styles\base\reset.scss" />
+    <Content Include="Content\Styles\layout\layout.scss" />
     <Content Include="Content\Styles\layout\layoutBase.scss" />
     <Content Include="Content\Styles\utils\colors.scss" />
     <Content Include="Content\Styles\utils\defaults.scss" />
     <Content Include="Content\Styles\utils\mixins.scss" />
     <Content Include="Content\Styles\utils\zIndexes.scss" />
     <Content Include="Content\utils\apiUtils.ts" />
+    <Content Include="Content\utils\constants\mapLayers.ts" />
     <Content Include="Content\utils\deepGetSet.ts" />
     <Content Include="Content\utils\getWordForm.ts" />
     <Content Include="Content\utils\injectExternalStyles.ts" />
@@ -238,14 +252,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\api" />
-    <Folder Include="Content\components" />
-    <Folder Include="Content\containers" />
-    <Folder Include="Content\entries" />
-    <Folder Include="Content\store\actions" />
-    <Folder Include="Content\store\reducers" />
-    <Folder Include="Content\store\rootReducers" />
-    <Folder Include="Content\store\selectors" />
-    <Folder Include="Content\utils\domain" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UrbaBase\UrbaBase.csproj">
