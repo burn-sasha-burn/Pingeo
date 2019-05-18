@@ -6,13 +6,16 @@ import * as React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators, Dispatch} from 'redux';
 import {fetchAllIncidents} from 'store/actions/incidentsActions';
+import {selectIncident} from 'store/actions/selectedIncidentActions';
 import {incidentsByIdSelector} from 'store/selectors/incidentsSelectors';
+import {HandlersCache} from 'utils/HandlersCache';
 
 interface IIncidentMarkersProps {
     incidents: ITypedObject<IIncident>;
     map?: Map;
     onClick?: () => void;
     loadIncidents?: () => void;
+    selectIncident?: (id: string) => void;
 }
 
 class IncidentMarksComponent extends React.PureComponent<IIncidentMarkersProps> {
@@ -35,10 +38,22 @@ class IncidentMarksComponent extends React.PureComponent<IIncidentMarkersProps> 
 
         return (
             <>
-                {values.map((incident) => <LFireMarker key={incident.id} position={incident.coordinate} map={map}/>)}
+                {values.map((incident) => (
+                    <LFireMarker
+                        key={incident.id}
+                        position={incident.coordinate}
+                        onClick={this.markerClicksCache.getHandler(incident.id, incident)}
+                        map={map}
+                    />
+                ))}
             </>
         );
     }
+
+    private readonly handleMarkerClick = (incident: IIncident) => {
+        this.props.selectIncident(incident.id);
+    }
+    private readonly markerClicksCache = new HandlersCache(this.handleMarkerClick);
 }
 
 const mapStateToProps = (state: IGeneralObject) => ({
@@ -46,5 +61,6 @@ const mapStateToProps = (state: IGeneralObject) => ({
 });
 const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
     loadIncidents: fetchAllIncidents,
+    selectIncident,
 }, dispatch);
 export const IncidentMarkers = connect(mapStateToProps, mapDispatchToProps)(IncidentMarksComponent);

@@ -1,4 +1,4 @@
-export class MenuItemHandlersCache<T> {
+export class HandlersCache<T> {
     private handlersMap: { [key: string]: () => void } = {};
 
     constructor(private handler: (arg: T) => void) {
