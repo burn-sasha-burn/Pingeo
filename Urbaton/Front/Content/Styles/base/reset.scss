@@ -1,0 +1,223 @@
+a,
+b,
+button,
+dd,
+div,
+dl,
+dt,
+em,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+i,
+input,
+img,
+label,
+li,
+ol,
+p,
+s,
+select,
+small,
+span,
+strong,
+sub,
+sup,
+textarea,
+u,
+ul {
+  vertical-align: baseline;
+}
+
+html,
+body,
+button,
+dd,
+div,
+dl,
+dt,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+li,
+ol,
+p,
+select,
+table,
+td,
+textarea,
+th,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+img,
+table,
+td,
+th {
+  border: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  outline: 0;
+  font-size: 1em;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+textarea {
+  overflow: auto;
+}
+
+ins {
+  text-decoration: none;
+}
+
+small {
+  font-size: 100%;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+/** @see http://haslayout.net/css/No-Increase-on--ol--Numbers-Bug */
+li {
+  display: list-item;
+}
+
+td,
+th {
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  font-weight: normal;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-style: normal;
+  font-weight: normal;
+}
+
+/** @see http://dimox.name/input-submit-vertical-align-in-firefox/ */
+input::-moz-focus-inner {
+  border: none;
+  padding: 0;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+/* other */
+.left {
+  float: left !important;
+}
+
+.right {
+  float: right !important;
+}
+
+.bnone {
+  background: none !important;
+}
+
+.tright {
+  text-align: right;
+}
+
+.tcenter {
+  text-align: center;
+}
+
+.clear {
+  clear: both;
+}
+
+.inlineBlock {
+  display: inline-block;
+}
+
+.ie-lt8 .inlineBlock {
+  display: inline;
+  zoom: 1;
+}
+
+.clearfix::after {
+  clear: both;
+  content: "";
+  display: block;
+}
+
+.ie-lt8 .clearfix {
+  zoom: 1;
+}
+
+a {
+  text-decoration: none;
+}
+
+::-webkit-input-placeholder {
+  color: #aaa !important;
+}
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #aaa !important;
+  opacity: 1;
+}
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #aaa !important;
+  opacity: 1;
+}
+
+:-ms-input-placeholder {
+  color: #aaa !important;
+}
+
+/* ie-gt9 fix { */
+
+::-ms-clear,
+::-ms-reveal {
+  display: none;
+}
+
+a:active {
+  background-color: transparent;
+}
+
+a:focus {
+  outline: solid 0 transparent;
+}
+
+/* } ie-gt9 fix */
