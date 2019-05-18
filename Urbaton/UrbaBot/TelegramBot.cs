@@ -17,5 +17,10 @@ namespace UrbaBot
         {
             return _botClient.SetWebhookAsync($"{BotSettings.DomainUrl}/{BotSettings.HookResponse}");
         }
+
+        public TelegramBotClient GetClient()
+        {
+            return _botClient;
+        }
     }
 }
