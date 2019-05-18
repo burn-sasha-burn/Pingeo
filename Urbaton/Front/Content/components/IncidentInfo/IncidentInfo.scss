@@ -1,0 +1,35 @@
+@import "Styles/utils/defaults";
+@import "Styles/utils/mixins";
+
+$closeSize: 40px;
+
+.incident {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 24px;
+}
+
+.close {
+  @include cleanButton();
+  @include clickable();
+  flex: 0 1 $closeSize;
+  height: $closeSize;
+  font-size: $fontSizeEL;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 5px;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 36px;
+
+  h1 {
+    flex: 1 0;
+    line-height: $closeSize;
+  }
+}

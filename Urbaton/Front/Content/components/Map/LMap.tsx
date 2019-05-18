@@ -2,18 +2,17 @@ import * as L from 'leaflet';
 import {Map} from 'leaflet';
 import * as React from 'react';
 import {ReactElement, ReactNode, RefObject} from 'react';
-import styles from './RMap.scss';
+import styles from './LMap.scss';
 
 interface IRMapProps {
     children?: ReactNode;
-    defaultZoom?: number;
 }
 
 interface IRMapState {
     initialized: boolean;
 }
 
-export class RMap extends React.Component<IRMapProps, IRMapState> {
+export class LMap extends React.Component<IRMapProps, IRMapState> {
     private readonly mapRef: RefObject<HTMLDivElement>;
     private map: Map;
 

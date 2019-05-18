@@ -238,7 +238,7 @@
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
     <Content Include="log4net.config" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\IncidentsPage\Index.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -248,7 +248,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructureMapControllersFactory.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IncidentsPageController.cs" />
     <Compile Include="Controllers\IncidentsController.cs" />
     <Compile Include="Exceptions\ControllerNotFoundException.cs" />
     <Compile Include="Global.asax.cs" />

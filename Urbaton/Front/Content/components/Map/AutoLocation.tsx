@@ -23,7 +23,7 @@ export class AutoLocation extends React.Component<ILocationProps> {
     }
 
     public render() {
-        return (<div/>);
+        return (<></>);
     }
 
     private isSet = false;

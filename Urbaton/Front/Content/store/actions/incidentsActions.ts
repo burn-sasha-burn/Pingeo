@@ -10,7 +10,7 @@ export const REMOVE_INCIDENTS = incidentActions.removeActionType;
 export const saveIncidents = incidentActions.save;
 export const removeIncidents = incidentActions.remove;
 
-export function loadAllIncidents(): GeneralThunkAction<Promise<IIncident[]>> {
+export function fetchAllIncidents(): GeneralThunkAction<Promise<IIncident[]>> {
     return (dispatch: GeneralThunkDispatch, getState: GeneralGetState) => {
         return getIncidents()
             .then((incidents) => {

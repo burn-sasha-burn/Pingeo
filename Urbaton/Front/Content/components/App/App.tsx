@@ -1,26 +1,29 @@
+import {IncidentInfoBackplate} from 'components/IncidentInfoBackplate/IncidentInfoBackplate';
+import {IncidentMarkers} from 'components/IncidentMarks/IncidentMarkers';
 import {AutoLocation} from 'components/Map/AutoLocation';
-import {RMap} from 'components/Map/RMap';
-import {RTileLayer} from 'components/Map/RTileLayer';
+import {LMap} from 'components/Map/LMap';
+import {LTileLayer} from 'components/Map/LTileLayer';
 import * as React from 'react';
 import {globeLayerAttribution, globeLayerUrlTemplate} from 'utils/constants/mapLayers';
+import styles from './App.scss';
 
-interface IAppProps {
-
-}
-
-export class App extends React.Component<IAppProps> {
+export class App extends React.Component {
     public render() {
         return (
-            <RMap>
-                <AutoLocation/>
-                <RTileLayer
-                    urlTemplate={globeLayerUrlTemplate}
-                    options={{
-                        crossOrigin: true,
-                        attribution: globeLayerAttribution,
-                    }}
-                />
-            </RMap>
+            <div className={styles.appContainer}>
+                <LMap>
+                    <AutoLocation/>
+                    <LTileLayer
+                        urlTemplate={globeLayerUrlTemplate}
+                        options={{
+                            crossOrigin: true,
+                            attribution: globeLayerAttribution,
+                        }}
+                    />
+                    <IncidentMarkers/>
+                </LMap>
+                <IncidentInfoBackplate/>
+            </div>
         );
     }
 }

@@ -1,4 +1,5 @@
 @import "./defaults";
+@import "./colors";
 
 @mixin cleanButton {
   background: none;
@@ -125,4 +126,14 @@
   ); // Standard, IE10, Firefox 16+, Opera 12.10+, Safari 7+, Chrome 26+
 
   background-repeat: repeat-x;
+}
+
+@mixin clickable($hoverColor: $lightGrey , $activeColor: $br) {
+  &:enabled:hover,
+  &:enabled:focus {
+    background-color: $lightGrey;
+  }
+  &:enabled:active {
+    background-color: $activeColor;
+  }
 }
