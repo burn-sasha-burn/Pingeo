@@ -190,6 +190,7 @@
     <Content Include="Content\components\Map\LFireMarker.tsx" />
     <Content Include="Content\components\Map\LMap.scss" />
     <Content Include="Content\components\Map\LMap.tsx" />
+    <Content Include="Content\components\Map\LMapContainer.tsx" />
     <Content Include="Content\components\Map\LMarker.tsx" />
     <Content Include="Content\components\Map\LTileLayer.tsx" />
     <Content Include="Content\components\Map\LZoomControl.tsx" />
@@ -204,6 +205,7 @@
     <Content Include="Content\domain\IGeneralEditInfo.ts" />
     <Content Include="Content\domain\IImage.ts" />
     <Content Include="Content\domain\IIncident.ts" />
+    <Content Include="Content\domain\IMapInfo.ts" />
     <Content Include="Content\domain\IPoint.ts" />
     <Content Include="Content\domain\IStatus.ts" />
     <Content Include="Content\domain\IUser.ts" />
@@ -223,11 +225,14 @@
     <Content Include="Content\Fonts\Kontur-Iconic-eco-webfont.woff" />
     <Content Include="Content\Fonts\Kontur-Iconic-eco-webfont.woff2" />
     <Content Include="Content\store\actions\incidentsActions.ts" />
+    <Content Include="Content\store\actions\mapInfoActions.ts" />
     <Content Include="Content\store\actions\selectedIncidentActions.ts" />
     <Content Include="Content\store\reducers\incidentsReducer.ts" />
+    <Content Include="Content\store\reducers\mapInfoReducer.ts" />
     <Content Include="Content\store\rootPaths.ts" />
     <Content Include="Content\store\rootReducer.ts" />
     <Content Include="Content\store\selectors\incidentsSelectors.ts" />
+    <Content Include="Content\store\selectors\mapInfoSelectors.ts" />
     <Content Include="Content\store\selectors\routeSelectors.ts" />
     <Content Include="Content\store\selectors\selectedIncidentSelector.ts" />
     <Content Include="Content\Styles\base\fontImports.scss" />

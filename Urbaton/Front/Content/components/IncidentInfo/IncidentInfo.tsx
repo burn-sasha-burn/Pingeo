@@ -2,16 +2,20 @@ import CrossIcon from '@skbkontur/react-icons/Delete';
 import {Coordinate} from 'components/Coordinate/Coordinate';
 import {IncidentStatus} from 'components/IncidentStatus/IncidentStatus';
 import {IIncident} from 'domain/IIncident';
+import {IPoint} from 'domain/IPoint';
 import * as React from 'react';
+import Button from 'retail-ui/components/Button/Button';
+import Hint from 'retail-ui/components/Hint/Hint';
 import {toDateTimeStr} from 'utils/dateUtils';
 import styles from './IncidentInfo.scss';
 
 interface IIncidentInfoProps {
     incident: IIncident;
     onClose: () => void;
+    onToMap: (coordinate: IPoint) => void;
 }
 
-export function IncidentInfo({incident, onClose}: IIncidentInfoProps) {
+export function IncidentInfo({incident, onClose, onToMap}: IIncidentInfoProps) {
     if (!incident) {
         return null;
     }
@@ -26,7 +30,12 @@ export function IncidentInfo({incident, onClose}: IIncidentInfoProps) {
             </div>
             <IncidentStatus status={incident.status}/>
             <p>
-                <span>Место:</span> <Coordinate {...incident.location}/>
+                <span>Место:</span>{' '}
+                <Hint text="Перейти к карте">
+                    <Button use="link" onClick={() => onToMap(incident.location)}>
+                        <Coordinate {...incident.location}/>
+                    </Button>
+                </Hint>
             </p>
             <p>
                 Описание: {incident.description}

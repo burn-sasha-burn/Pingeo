@@ -1,3 +1,4 @@
+import {IMapInfo} from 'domain/IMapInfo';
 import * as L from 'leaflet';
 import {Map} from 'leaflet';
 import * as React from 'react';
@@ -6,6 +7,7 @@ import styles from './LMap.scss';
 
 interface IRMapProps {
     children?: ReactNode;
+    mapInfo?: IMapInfo;
 }
 
 interface IRMapState {
@@ -29,6 +31,14 @@ export class LMap extends React.Component<IRMapProps, IRMapState> {
         if (this.mapRef && this.mapRef.current) {
             this.map = L.map(this.mapRef.current);
             this.setState({initialized: true});
+        }
+    }
+
+    public componentDidUpdate(prevProps: IRMapProps) {
+        const prevPos = prevProps.mapInfo && prevProps.mapInfo.position;
+        const newPos = this.props.mapInfo && this.props.mapInfo.position;
+        if (prevPos !== newPos && newPos) {
+            this.map.setView(newPos, this.map.getZoom());
         }
     }
 
