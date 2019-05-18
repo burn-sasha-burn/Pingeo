@@ -174,6 +174,7 @@
     <Content Include="Content\components\App\App.scss" />
     <Content Include="Content\components\App\App.tsx" />
     <Content Include="Content\components\Coordinate\Coordinate.tsx" />
+    <Content Include="Content\components\DivIcons\BroomDivIcon.tsx" />
     <Content Include="Content\components\DivIcons\FireDivIcon.tsx" />
     <Content Include="Content\components\DivIcons\FireIconFocused.tsx" />
     <Content Include="Content\components\IncidentInfoBackplate\IncidentInfoBackplate.scss" />
@@ -182,7 +183,10 @@
     <Content Include="Content\components\IncidentInfo\IncidentInfo.tsx" />
     <Content Include="Content\components\IncidentMarks\IncidentMarkers.tsx" />
     <Content Include="Content\components\IncidentMarks\incidentMarkersUtils.ts" />
+    <Content Include="Content\components\IncidentStatus\IncidentStatus.scss" />
+    <Content Include="Content\components\IncidentStatus\IncidentStatus.tsx" />
     <Content Include="Content\components\Map\AutoLocation.tsx" />
+    <Content Include="Content\components\Map\LBroomMarker.tsx" />
     <Content Include="Content\components\Map\LFireMarker.tsx" />
     <Content Include="Content\components\Map\LMap.scss" />
     <Content Include="Content\components\Map\LMap.tsx" />
@@ -198,8 +202,11 @@
     <Content Include="Content\dist\css\app.css" />
     <Content Include="Content\dist\js\app.js" />
     <Content Include="Content\domain\IGeneralEditInfo.ts" />
+    <Content Include="Content\domain\IImage.ts" />
     <Content Include="Content\domain\IIncident.ts" />
     <Content Include="Content\domain\IPoint.ts" />
+    <Content Include="Content\domain\IStatus.ts" />
+    <Content Include="Content\domain\IUser.ts" />
     <Content Include="Content\domain\QueryStatus.ts" />
     <Content Include="Content\entries\app.tsx" />
     <Content Include="Content\entries\createAppStore.ts" />
@@ -236,7 +243,9 @@
     <Content Include="Content\utils\apiUtils.ts" />
     <Content Include="Content\utils\constants\mapLayers.ts" />
     <Content Include="Content\utils\constants\routesConstants.ts" />
+    <Content Include="Content\utils\dateUtils.ts" />
     <Content Include="Content\utils\deepGetSet.ts" />
+    <Content Include="Content\utils\domain\reshapeIncident.ts" />
     <Content Include="Content\utils\getWordForm.ts" />
     <Content Include="Content\utils\HandlersCache.ts" />
     <Content Include="Content\utils\injectExternalStyles.ts" />
