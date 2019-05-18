@@ -1,0 +1,18 @@
+@import "Styles/utils/zIndexes";
+
+.backplate {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: $infoBackplateZIndex;
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: translateY(100%);
+  transition: transform 0.2s ease-in;
+}
+
+.backplate.opened {
+  transform: translateY(0);
+  transition-timing-function: ease-out;
+}
