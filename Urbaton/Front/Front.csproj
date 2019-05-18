@@ -249,6 +249,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructureMapControllerActivator.cs" />
     <Compile Include="App_Start\StructureMapControllerFactory.cs" />
+    <Compile Include="App_Start\TelegramBotConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\IncidentsController.cs" />
     <Compile Include="Exceptions\ControllerNotFoundException.cs" />
