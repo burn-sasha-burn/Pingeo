@@ -168,28 +168,11 @@
     <Content Include="configs\webpack\webpack.base.js" />
     <Content Include="configs\webpack\webpack.dev.js" />
     <Content Include="configs\webpack\webpack.prod.js" />
-    <Content Include="Content\api\gepIpApi.ts" />
-    <Content Include="Content\api\incidentsApi.ts" />
-    <Content Include="Content\assets.d.ts" />
-    <Content Include="Content\components\App\App.scss" />
-    <Content Include="Content\components\App\App.tsx" />
-    <Content Include="Content\components\IncidentMarks\IncidentMarks.tsx" />
-    <Content Include="Content\components\Map\AutoLocation.tsx" />
-    <Content Include="Content\components\Map\RMap.scss" />
-    <Content Include="Content\components\Map\RMap.tsx" />
-    <Content Include="Content\components\Map\RTileLayer.tsx" />
-    <Content Include="Content\custom.d.ts" />
     <Content Include="Content\dist\2273e3d8ad9264b7daa5bdbf8e6b47f8.png" />
     <Content Include="Content\dist\4f0283c6ce28e888000e978e537a6a56.png" />
     <Content Include="Content\dist\a6137456ed160d7606981aa57c559898.png" />
     <Content Include="Content\dist\css\app.css" />
     <Content Include="Content\dist\js\app.js" />
-    <Content Include="Content\domain\IGeneralEditInfo.ts" />
-    <Content Include="Content\domain\IIncident.ts" />
-    <Content Include="Content\domain\IPoint.ts" />
-    <Content Include="Content\domain\QueryStatus.ts" />
-    <Content Include="Content\entries\app.tsx" />
-    <Content Include="Content\entries\createAppStore.ts" />
     <Content Include="Content\Fonts\Kontur-Iconic-eco-20px.eot" />
     <Content Include="Content\Fonts\Kontur-Iconic-eco-20px.otf" />
     <Content Include="Content\Fonts\Kontur-Iconic-eco-20px.svg" />
@@ -202,36 +185,6 @@
     <Content Include="Content\Fonts\Kontur-Iconic-eco-webfont.ttf" />
     <Content Include="Content\Fonts\Kontur-Iconic-eco-webfont.woff" />
     <Content Include="Content\Fonts\Kontur-Iconic-eco-webfont.woff2" />
-    <Content Include="Content\store\actions\incidentsActions.ts" />
-    <Content Include="Content\store\reducers\incidentsReducer.ts" />
-    <Content Include="Content\store\rootPaths.ts" />
-    <Content Include="Content\store\rootReducer.ts" />
-    <Content Include="Content\store\selectors\incidentsSelectors.ts" />
-    <Content Include="Content\Styles\base\fontImports.scss" />
-    <Content Include="Content\Styles\base\fonts.scss" />
-    <Content Include="Content\Styles\base\icons.scss" />
-    <Content Include="Content\Styles\base\reset.scss" />
-    <Content Include="Content\Styles\layout\layout.scss" />
-    <Content Include="Content\Styles\layout\layoutBase.scss" />
-    <Content Include="Content\Styles\utils\colors.scss" />
-    <Content Include="Content\Styles\utils\defaults.scss" />
-    <Content Include="Content\Styles\utils\mixins.scss" />
-    <Content Include="Content\Styles\utils\zIndexes.scss" />
-    <Content Include="Content\utils\apiUtils.ts" />
-    <Content Include="Content\utils\constants\mapLayers.ts" />
-    <Content Include="Content\utils\deepGetSet.ts" />
-    <Content Include="Content\utils\getWordForm.ts" />
-    <Content Include="Content\utils\injectExternalStyles.ts" />
-    <Content Include="Content\utils\isArrayEquals.ts" />
-    <Content Include="Content\utils\retailUi\MenuItemHandlersCache.ts" />
-    <Content Include="Content\utils\store\actionTypes.ts" />
-    <Content Include="Content\utils\store\createByIdActions.ts" />
-    <Content Include="Content\utils\store\createByIdReducer.ts" />
-    <Content Include="Content\utils\store\createEditActions.ts" />
-    <Content Include="Content\utils\store\createSimpleSaveReducer.ts" />
-    <Content Include="Content\utils\typeUtils.ts" />
-    <Content Include="Content\utils\urlUtils.ts" />
-    <Content Include="Content\utils\wrapToArray.ts" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="package-lock.json" />
@@ -274,6 +227,7 @@
       <Name>UrbaBot</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
