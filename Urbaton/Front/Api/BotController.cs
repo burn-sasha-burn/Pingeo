@@ -1,27 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using System.Web.Http;
+using System.Web.Http.Results;
 using Telegram.Bot.Types;
-using TelegrammCoreBot.Models;
+using UrbaBot;
 
-namespace TelegrammCoreBot.Controllers
+namespace Front.Api
 {
-    [Route("api/message/update")]
-    [ApiController]
-    public class MessageController : ControllerBase
+    public class BotController : ApiController
     {
-        // GET api/values
-        [HttpGet]
-        public string Get()
-        {
-            return "Method GET unuvalable";
-        }
-
-        // POST api/values
         [HttpPost]
-        public async Task<OkResult> Post([FromBody]Update update)
+        [Route(BotSettings.HookResponse)]
+        public async Task<OkResult> Post([FromBody] Update update)
         {
 //            if (update == null) return Ok();
 
