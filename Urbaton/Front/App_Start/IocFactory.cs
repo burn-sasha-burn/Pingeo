@@ -1,7 +1,4 @@
-﻿using System.Web.Http;
-using System.Web.Http.Dispatcher;
-using System.Web.Mvc;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using StructureMap;
 using StructureMap.Pipeline;
 
@@ -40,12 +37,5 @@ namespace Front
         }
 
         public static T GetInstance<T>() => GetContainer().GetInstance<T>();
-
-        public static void Configure()
-        {
-            var container = GetContainer();
-            ControllerBuilder.Current.SetControllerFactory(new StructureMapControllerFactory(container));
-            GlobalConfiguration.Configuration.Services.Replace(typeof(IHttpControllerActivator), new StructureMapControllerActivator(container));
-        }
     }
 }

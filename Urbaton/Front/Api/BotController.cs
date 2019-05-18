@@ -8,6 +8,13 @@ namespace Front.Api
 {
     public class BotController : ApiController
     {
+        private readonly ITelegramBot _telegramBot;
+
+        public BotController(ITelegramBot telegramBot)
+        {
+            _telegramBot = telegramBot;
+        }
+
         [HttpPost]
         [Route(BotSettings.HookResponse)]
         public async Task<OkResult> Post([FromBody] Update update)

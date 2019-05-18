@@ -276,6 +276,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructureMapControllerActivator.cs" />
     <Compile Include="App_Start\StructureMapControllerFactory.cs" />
+    <Compile Include="App_Start\TelegramBotConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\IncidentsController.cs" />
     <Compile Include="Exceptions\ControllerNotFoundException.cs" />
@@ -301,6 +302,7 @@
       <Name>UrbaBot</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
