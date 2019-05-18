@@ -205,7 +205,6 @@
     <Content Include="Content\utils\wrapToArray.ts" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="log.config.xml" />
     <Content Include="package-lock.json" />
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
