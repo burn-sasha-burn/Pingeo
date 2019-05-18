@@ -243,6 +243,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\BotController.cs" />
+    <Compile Include="Api\FilesController.cs" />
     <Compile Include="Api\IncidentsController.cs" />
     <Compile Include="App_Start\IocFactory.cs" />
     <Compile Include="ActionResults\ServiceStackJsonResult.cs" />

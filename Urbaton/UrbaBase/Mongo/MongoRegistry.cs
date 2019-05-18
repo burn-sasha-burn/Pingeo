@@ -2,6 +2,7 @@
 using JetBrains.Annotations;
 using log4net;
 using MongoDB.Driver;
+using MongoDB.Driver.GridFS;
 using StructureMap;
 
 namespace UrbaBase.Mongo
@@ -25,7 +26,17 @@ namespace UrbaBase.Mongo
             For<MongoUrl>().Use(() => new MongoUrl(ConfigurationManager.ConnectionStrings["mongodb"].ConnectionString));
             For(typeof(IMongoCollection<>)).Singleton().Use(new IMongoCollectionInstanceFactory());
 
+            For<GridFSBucket>().Singleton().Use(c => MongoGridFs(c));
+
             Log.Debug("Mongo registry applied");
+        }
+
+        private static GridFSBucket MongoGridFs(IContext c)
+        {
+            var connectionString = c.GetInstance<MongoUrl>();
+            var mongoClient = new MongoClient(connectionString);
+            var database = mongoClient.GetDatabase("pingeo");
+            return new GridFSBucket(database);
         }
     }
 }

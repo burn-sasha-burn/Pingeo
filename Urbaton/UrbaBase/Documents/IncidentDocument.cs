@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 using UrbaBase.Models;
@@ -11,6 +12,7 @@ namespace UrbaBase.Documents
     public class IncidentDocument
     {
         [BsonId]
+        [BsonRepresentation(BsonType.String)]
         [JsonProperty("id")]
         public Guid Id { get; set; }
 

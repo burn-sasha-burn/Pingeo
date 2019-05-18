@@ -1,7 +1,10 @@
+using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Results;
 using Telegram.Bot.Types;
+using UrbaBase.Repositories;
 using UrbaBot;
 
 namespace Front.Api
@@ -9,31 +12,28 @@ namespace Front.Api
     public class BotController : ApiController
     {
         private readonly ITelegramBot _telegramBot;
+        private readonly IFilesRepo _filesRepo;
 
-        public BotController(ITelegramBot telegramBot)
+        public BotController(ITelegramBot telegramBot,
+                             IFilesRepo filesRepo)
         {
             _telegramBot = telegramBot;
+            _filesRepo = filesRepo;
         }
 
         [HttpPost]
         [Route(BotSettings.HookResponse)]
-        public async Task<OkResult> Post([FromBody] Update update)
+        public async Task<HttpResponseMessage> Post([FromBody] Update update)
         {
-//            if (update == null) return Ok();
+            var photos = update.Message.Photo;
+            if (photos.Any())
+            {
+                var fileId = photos[3].FileId;
+                var bytes = await _telegramBot.DownloadFile(fileId);
+                await _filesRepo.Save(fileId, bytes);
+            }
 
-//            var commands = Bot.Commands;
-//            var message = update.Message;
-//            var botClient = await Bot.GetBotClientAsync();
-
-//            foreach (var command in commands)
-//            {
-//                if (command.Contains(message))
-//                {
-//                    await command.Execute(message, botClient);
-//                    break;
-//                }
-//            }
-            return Ok();
+            return new HttpResponseMessage(HttpStatusCode.OK);
         }
     }
 }

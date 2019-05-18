@@ -19,6 +19,6 @@ namespace UrbaBot
             }
         }
 
-        public const string Key = "788292459:AAEPtMAiX4TKbgpBQZMQS_9mArnv_8N2k2w";
+        public const string Key = "831389064:AAHVl6qclWON86MgAO2Ck99g6AFtSqgJMN4";
     }
 }
