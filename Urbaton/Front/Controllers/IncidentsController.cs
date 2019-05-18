@@ -43,11 +43,11 @@ namespace Front.Controllers
             var random = new Random();
             for (var i = 0; i < 150; i++)
             {
-                incidents.Add(new IncidentViewModel()
+                incidents.Add(new IncidentDocument()
                     {
-                        id = Guid.NewGuid(),
-                        coordinate = new PointViewModel() {lat = RandomCoordDiff(0.1f / 2, 53.2035477f), lng = RandomCoordDiff(0.1f, 50.2188443f)},
-                        description = "Рондомоный инцедент " + i
+                        Id = Guid.NewGuid(),
+                        Location = new LocationDocument() {Longitude = RandomCoordDiff(0.1f / 2, 53.2035477f), Latitude = RandomCoordDiff(0.1f, 50.2188443f)},
+                        Description = "Рондомоный инцедент " + i
                     }
                 );
             }

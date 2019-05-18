@@ -1,5 +1,4 @@
 using System.Web.Mvc;
-using Front.Models;
 using JetBrains.Annotations;
 using UrbaBase.Repositories;
 
