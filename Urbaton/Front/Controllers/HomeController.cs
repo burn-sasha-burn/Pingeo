@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
-using Front.Models;
+using UrbaBase.Documents;
+using UrbaBase.Models;
 using UrbaBase.Repositories;
 
 namespace Front.Controllers
@@ -7,7 +10,7 @@ namespace Front.Controllers
     public class HomeController : Controller
     {
         private readonly ISomeRepo _someRepo;
-
+        
         public HomeController(ISomeRepo someRepo)
         {
             _someRepo = someRepo;
@@ -15,11 +18,8 @@ namespace Front.Controllers
 
         public ActionResult Index()
         {
-            return View(new HomeIndexModel()
-            {
-                SomeLine = "Hello World!",
-                SomeDocuments = _someRepo.Get()
-            });
+            return View();
+
         }
     }
 }

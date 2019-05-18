@@ -247,9 +247,6 @@
     <Compile Include="Controllers\IncidentsController.cs" />
     <Compile Include="Exceptions\ControllerNotFoundException.cs" />
     <Compile Include="Global.asax.cs" />
-    <Compile Include="Models\HomeIndexModel.cs" />
-    <Compile Include="Models\IncednetViewModel.cs" />
-    <Compile Include="Models\PointViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -266,6 +263,9 @@
       <Project>{e70ed661-9a1b-40fd-af59-bb7d28c66c2f}</Project>
       <Name>UrbaBase</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

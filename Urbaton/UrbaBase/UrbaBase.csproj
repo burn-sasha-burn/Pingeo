@@ -78,14 +78,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Documents\IncidentDocument.cs" />
     <Compile Include="Documents\SomeDocument.cs" />
+    <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\LocationDocument.cs" />
+    <Compile Include="Models\StatusDocument.cs" />
+    <Compile Include="Models\StringValueAttribute.cs" />
+    <Compile Include="Models\UserDocument.cs" />
     <Compile Include="Mongo\CollectionNameAttribute.cs" />
     <Compile Include="Mongo\IMongoCollectionInstance.cs" />
     <Compile Include="Mongo\IMongoCollectionInstanceFactory.cs" />
+    <Compile Include="Mongo\MongoCollectionExtensions.cs" />
     <Compile Include="Mongo\MongoCollectionFactory.cs" />
     <Compile Include="Mongo\MongoDatabaseExtensions.cs" />
     <Compile Include="Mongo\MongoRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IIncidentRepo.cs" />
+    <Compile Include="Repositories\IncidentRepo.cs" />
     <Compile Include="Repositories\ISomeRepo.cs" />
     <Compile Include="Repositories\SomeRepo.cs" />
   </ItemGroup>
