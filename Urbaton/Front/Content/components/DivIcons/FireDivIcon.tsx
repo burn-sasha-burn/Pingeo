@@ -10,14 +10,14 @@ export class FireDivIcon {
                 className: '',
                 ...options,
                 html:
-                svgStr,
+                fireDivIconSvgStr,
             }
         ;
         return new DivIcon(divIconOptions);
     }
 }
 
-const svgStr = `<svg
+export const fireDivIconSvgStr = `<svg
             version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
             width="40px" height="40px" x="0px" y="0px" viewBox="0 0 512 512"
             xmlSpace="preserve"

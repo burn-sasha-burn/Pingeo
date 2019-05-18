@@ -28,7 +28,7 @@ namespace Front.Api
             {
                 new IncidentDocument
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("9d72028b-bbe1-4ca1-95c0-a4883dee33e0"),
                     CreationDate = DateTime.UtcNow,
                     Creator = new UserDocument {Nick = "Superman"},
                     CustomText = "fly like a red bullit",
@@ -38,7 +38,7 @@ namespace Front.Api
                 },
                 new IncidentDocument()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = Guid.Parse("9f9172f4-55bb-49dd-8a44-151383033a7d"),
                     CreationDate = DateTime.UtcNow,
                     Creator = new UserDocument {Nick = "Batman"},
                     CustomText = "have to work it out",

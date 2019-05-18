@@ -8,7 +8,7 @@ export interface IIncident {
     description: string;
     location: IPoint;
     status: IStatus;
-    CreationDate: string;
+    creationDate: string;
     creator: IUser;
     images: IImage[];
     meetupUsers: IUser[];
