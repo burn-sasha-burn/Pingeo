@@ -28,7 +28,26 @@ namespace Front.Controllers
                 }
             };
 
+            var random = new Random();
+            for (var i = 0; i < 150; i++)
+            {
+                incidents.Add(new IncidentViewModel()
+                    {
+                        id = Guid.NewGuid(),
+                        coordinate = new PointViewModel() {lat = RandomCoordDiff(0.1f / 2, 53.2035477f), lng = RandomCoordDiff(0.1f, 50.2188443f)},
+                        description = "Рондомоный инцедент " + i
+                    }
+                );
+            }
+
             return new ServiceStackJsonResult() {Data = incidents};
+        }
+
+        private readonly Random rand = new Random();
+
+        private float RandomCoordDiff(float diff, float coord)
+        {
+            return (float) ((rand.NextDouble() - 0.5) * diff) + coord;
         }
     }
 }
