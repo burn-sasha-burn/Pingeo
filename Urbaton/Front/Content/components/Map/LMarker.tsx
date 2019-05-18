@@ -1,5 +1,5 @@
 import {IPoint} from 'domain/IPoint';
-import {DivIcon, Icon, Map, Marker} from 'leaflet';
+import {DivIcon, Map, Marker} from 'leaflet';
 import * as Leaflet from 'leaflet';
 import * as React from 'react';
 
