@@ -1,0 +1,36 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "value",
+          "mixin",
+          "return",
+          "function",
+          "for",
+          "if",
+          "include",
+          "extend"
+        ]
+      }
+    ],
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": [
+          "global"
+        ]
+      }
+    ],
+    "property-no-unknown": [
+      true,
+      {
+        "ignoreProperties": [
+          "composes"
+        ]
+      }
+    ]
+  }
+}
