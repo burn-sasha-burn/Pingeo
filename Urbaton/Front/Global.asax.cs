@@ -11,6 +11,7 @@ namespace Front
         protected void Application_Start()
         {
             XmlConfigurator.Configure();
+            IocFactory.Configure();
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
