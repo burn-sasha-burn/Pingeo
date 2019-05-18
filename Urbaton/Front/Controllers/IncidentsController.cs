@@ -18,13 +18,13 @@ namespace Front.Controllers
                 {
                     id = Guid.NewGuid(),
                     coordinate = new PointViewModel() {lat = 53.2035477f, lng = 50.1448443f},
-                    description = "Incident 1"
+                    description = "Скала Холл. 15 этаж завален коробками от пиццы. Я ОДИНЕ НЕ СПРАВЛЮСЬ!!! SOS !!!!! SOS !!!!!!!!!!!!!!"
                 },
                 new IncidentViewModel()
                 {
                     id = Guid.NewGuid(),
                     coordinate = new PointViewModel() {lat = 53.2065277f, lng = 50.1498443f},
-                    description = "Incident 2"
+                    description = "Здесь стройка. Просто стройкахаахахахахахахха"
                 }
             };
 

@@ -5,6 +5,7 @@ module.exports = function () {
     return {
         test: /\.css$/,
         include: /node_modules/,
+        exclude: /react-icons/,
         use: [
             cssExtractLoader(),
             cssLoader(false, undefined, 1),
