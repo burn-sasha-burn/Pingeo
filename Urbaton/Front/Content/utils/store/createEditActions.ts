@@ -1,7 +1,7 @@
 import {backupsPath, editMarksPath, IGeneralEditInfo, newMarksPath} from 'domain/IGeneralEditInfo';
 import {Error} from 'tslint/lib/error';
 import {immutableDeleteIn, immutableSetIn} from 'utils/deepGetSet';
-import {GeneralGetState, GeneralThunkAction, GeneralThunkDispatch, PayloadedAction} from 'utils/store/actionTypes';
+import {IGeneralGetState, GeneralThunkAction, GeneralThunkDispatch, PayloadedAction} from 'utils/store/actionTypes';
 
 type EntitiesSelector<T> = (stage: IGeneralObject) => ITypedObject<T>;
 type EditInfoSelector<T> = (stage: IGeneralObject) => IGeneralEditInfo<T>;
@@ -42,7 +42,7 @@ export function createEditActions<T>(
     }
 
     function startEdit(id: string, isNew: boolean = false): GeneralThunkAction<void> {
-        return (dispatch: GeneralThunkDispatch, getState: GeneralGetState) => {
+        return (dispatch: GeneralThunkDispatch, getState: IGeneralGetState) => {
             const prevEditInfo = editInfoSelector(getState());
             const entitiesById = entitiesByIdSelector(getState());
 
@@ -57,7 +57,7 @@ export function createEditActions<T>(
     }
 
     function completeEdit(id: string): GeneralThunkAction<Promise<T>> {
-        return (dispatch: GeneralThunkDispatch, getState: GeneralGetState) => {
+        return (dispatch: GeneralThunkDispatch, getState: IGeneralGetState) => {
             const prevEditInfos = editInfoSelector(getState());
             const entitiesById = entitiesByIdSelector(getState());
 
@@ -78,7 +78,7 @@ export function createEditActions<T>(
     }
 
     function cancelEdit(id: string): GeneralThunkAction<void> {
-        return (dispatch: GeneralThunkDispatch, getState: GeneralGetState) => {
+        return (dispatch: GeneralThunkDispatch, getState: IGeneralGetState) => {
             const prevEditInfos = editInfoSelector(getState());
 
             const originalEntity = prevEditInfos.backups[id];

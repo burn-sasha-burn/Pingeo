@@ -6,7 +6,7 @@ export type GeneralThunkDispatch = ThunkDispatch<IGeneralObject, undefined, Acti
 
 export type PayloadedAction<P> = AnyAction & { payload: P };
 
-export type GeneralGetState = () => { [key: string]: any };
+export type IGeneralGetState = () => IGeneralObject;
 
 /**
  * Redux behaviour changed by middleware, so overloads here
