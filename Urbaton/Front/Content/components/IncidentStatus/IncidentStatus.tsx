@@ -1,5 +1,5 @@
 import OkIcon from '@skbkontur/react-icons/Ok';
-import SpinnerIcon from '@skbkontur/react-icons/Spinner';
+import {broomDivIconSvgStr} from 'components/DivIcons/BroomDivIcon';
 import {fireDivIconFocusedSvgStr} from 'components/DivIcons/FireIconFocused';
 import {IStatus, NamedStatuses} from 'domain/IStatus';
 import * as React from 'react';
@@ -12,7 +12,7 @@ interface IIncidentStatusProps {
 export function IncidentStatus({status}: IIncidentStatusProps) {
     if (status === IStatus.New) {
         return (
-            <span className={styles.success}>
+            <span className={styles.new}>
                 <span className={styles.newIcon} dangerouslySetInnerHTML={{__html: fireDivIconFocusedSvgStr}}/>
                 <span className={styles.text}>{NamedStatuses[status]}</span>
             </span>
@@ -20,8 +20,8 @@ export function IncidentStatus({status}: IIncidentStatusProps) {
     }
     if (status === IStatus.Process) {
         return (
-            <span className={styles.process}>
-                <SpinnerIcon size={24}/>
+            <span>
+                <span className={styles.newIcon} dangerouslySetInnerHTML={{__html: broomDivIconSvgStr}}/>
                 <span className={styles.text}>{NamedStatuses[status]}</span>
             </span>
         );

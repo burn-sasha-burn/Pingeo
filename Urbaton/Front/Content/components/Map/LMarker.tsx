@@ -31,6 +31,10 @@ export class LMarker extends React.Component<ILMarkerProps> {
         this.updateMarker();
     }
 
+    public componentWillUnmount() {
+        this.marker.remove();
+    }
+
     public render() {
         return (<></>);
     }
