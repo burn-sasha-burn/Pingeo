@@ -1,0 +1,23 @@
+@import "Styles/utils/colors";
+
+.success {
+  color: $green;
+}
+
+.process {
+  color: #FF6028;
+}
+
+.new {
+  color: #ff6412;
+}
+
+.newIcon svg {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+}
+
+.text {
+  margin-left: 8px;
+}

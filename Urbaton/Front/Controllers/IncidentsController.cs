@@ -11,8 +11,7 @@ namespace Front.Controllers
         }
 
         [Route("Incidents/{id?}")]
-        [Route("MyIncidents/{id?}")]
-        [Route("MyMeets/{id?}")]
+        [Route("Meetups/{id?}")]
         public ActionResult Incidents([CanBeNull] string id)
         {
             return View("Index");

@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Telegram.Bot;
 
 namespace UrbaBot
 {
@@ -6,5 +7,6 @@ namespace UrbaBot
     {
         Task SetupWebhookAsync();
         Task<byte[]> DownloadFile(string fileId);
+        TelegramBotClient GetClient();
     }
 }

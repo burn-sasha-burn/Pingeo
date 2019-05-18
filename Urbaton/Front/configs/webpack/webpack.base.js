@@ -56,6 +56,10 @@ module.exports = function (options) {
                         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
                     },
                 }),
+                // // Moment contains require('./locale' + name) string. Webpack think that he have to add into bundle all locales
+                // // even if they doesn't used. Empty-module prevent webpack from adding unused locales into bundle.
+                // // All needed locales have to be imported by hand.
+                new webpack.ContextReplacementPlugin(/\.\/locale$/, 'empty-module', false, /js$/),
                 cssExtractPlugin,
             ],
 

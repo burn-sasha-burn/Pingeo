@@ -4,7 +4,7 @@ namespace UrbaBot
     {
         public const string HookResponse = "api/bot/update";
 
-        private const string NgrokUrl = "https://33e373f0.ngrok.io";
+        private const string NgrokUrl = "https://4828e2d5.ngrok.io";
         private const string PinGeoUrl = "https://pingeo.ru";
 
         public static string DomainUrl

@@ -28,5 +28,10 @@ namespace UrbaBot
                 return stream.GetBuffer();
             }
         }
+
+        public TelegramBotClient GetClient()
+        {
+            return _botClient;
+        }
     }
 }

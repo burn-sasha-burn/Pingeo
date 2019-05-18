@@ -1,17 +1,19 @@
 import {initializeIncidentMarkers} from 'components/IncidentMarks/incidentMarkersUtils';
+import {LBroomMarker} from 'components/Map/LBroomMarker';
 import {LFireMarker} from 'components/Map/LFireMarker';
 import {IIncident} from 'domain/IIncident';
+import {IStatus} from 'domain/IStatus';
 import {Map} from 'leaflet';
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators, Dispatch} from 'redux';
 import {fetchAllIncidents} from 'store/actions/incidentsActions';
 import {selectIncident} from 'store/actions/selectedIncidentActions';
-import {incidentsByIdSelector} from 'store/selectors/incidentsSelectors';
+import {filteredIncidentsSelector} from 'store/selectors/incidentsSelectors';
 import {HandlersCache} from 'utils/HandlersCache';
 
 interface IIncidentMarkersProps {
-    incidents: ITypedObject<IIncident>;
+    incidents: IIncident[];
     map?: Map;
     onClick?: () => void;
     loadIncidents?: () => void;
@@ -34,18 +36,22 @@ class IncidentMarksComponent extends React.PureComponent<IIncidentMarkersProps> 
             return null;
         }
 
-        const values = Object.values(incidents);
-
         return (
             <>
-                {values.map((incident) => (
-                    <LFireMarker
-                        key={incident.id}
-                        position={incident.coordinate}
-                        onClick={this.markerClicksCache.getHandler(incident.id, incident)}
-                        map={map}
-                    />
-                ))}
+                {incidents.map((incident) => {
+                    if (incident.status === IStatus.Finished) {
+                        return null;
+                    }
+                    const LMarker = incident.status === IStatus.Process ? LBroomMarker : LFireMarker;
+                    return (
+                        <LMarker
+                            key={incident.id}
+                            position={incident.location}
+                            onClick={this.markerClicksCache.getHandler(incident.id, incident)}
+                            map={map}
+                        />
+                    );
+                })}
             </>
         );
     }
@@ -57,7 +63,7 @@ class IncidentMarksComponent extends React.PureComponent<IIncidentMarkersProps> 
 }
 
 const mapStateToProps = (state: IGeneralObject) => ({
-    incidents: incidentsByIdSelector(state),
+    incidents: filteredIncidentsSelector(state),
 });
 const mapDispatchToProps = (dispatch: Dispatch) => bindActionCreators({
     loadIncidents: fetchAllIncidents,
