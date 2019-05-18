@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Front.ActionResults;
@@ -15,11 +16,15 @@ namespace Front.Controllers
             {
                 new IncidentViewModel()
                 {
-                    coordinate = new PointViewModel() {lat = 55.123f, lng = 55.251f}, description = "Incident 1"
+                    id = Guid.NewGuid(),
+                    coordinate = new PointViewModel() {lat = 55.123f, lng = 55.251f},
+                    description = "Incident 1"
                 },
                 new IncidentViewModel()
                 {
-                    coordinate = new PointViewModel() {lat = 22.123f, lng = 55.251f}, description = "Incident 2"
+                    id = Guid.NewGuid(),
+                    coordinate = new PointViewModel() {lat = 22.123f, lng = 55.251f},
+                    description = "Incident 2"
                 }
             };
 

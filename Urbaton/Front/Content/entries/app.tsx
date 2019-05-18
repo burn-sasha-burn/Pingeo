@@ -1,4 +1,4 @@
-import {AppContainer} from 'containers/AppContainer';
+import {App} from 'components/App/App';
 import {createAppStore} from 'entries/createAppStore';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -12,7 +12,7 @@ const store = createAppStore();
 
 ReactDOM.render(
     <Provider store={store}>
-        <AppContainer/>
+        <App/>
     </Provider>,
     root,
 );
