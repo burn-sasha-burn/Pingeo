@@ -1,26 +1,26 @@
 import {AutoLocation} from 'components/Map/AutoLocation';
-import {RMap} from 'components/Map/RMap';
-import {RTileLayer} from 'components/Map/RTileLayer';
+import {LFireMarker} from 'components/Map/LFireMarker';
+import {LMap} from 'components/Map/LMap';
+import {LTileLayer} from 'components/Map/LTileLayer';
 import * as React from 'react';
 import {globeLayerAttribution, globeLayerUrlTemplate} from 'utils/constants/mapLayers';
 
-interface IAppProps {
-
-}
-
-export class App extends React.Component<IAppProps> {
+export class App extends React.Component {
     public render() {
         return (
-            <RMap>
+            <LMap>
                 <AutoLocation/>
-                <RTileLayer
+                <LTileLayer
                     urlTemplate={globeLayerUrlTemplate}
                     options={{
                         crossOrigin: true,
                         attribution: globeLayerAttribution,
                     }}
                 />
-            </RMap>
+                <LFireMarker position={{lat: 53.2035384, lng: 50.144849699999995}}/>
+                <LFireMarker position={{lat: 53.2035384, lng: 51.144849699999995}}/>
+                <LFireMarker position={{lat: 53.2035384, lng: 50.644849699999995}}/>
+            </LMap>
         );
     }
 }

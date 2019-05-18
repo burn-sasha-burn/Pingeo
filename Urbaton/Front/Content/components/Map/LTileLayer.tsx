@@ -8,7 +8,7 @@ interface IRTileLayerProps {
     options?: TileLayerOptions;
 }
 
-export class RTileLayer extends React.Component<IRTileLayerProps> {
+export class LTileLayer extends React.Component<IRTileLayerProps> {
     private readonly tillLayer: TileLayer;
 
     constructor(props: IRTileLayerProps) {
@@ -25,6 +25,6 @@ export class RTileLayer extends React.Component<IRTileLayerProps> {
     }
 
     public render() {
-        return (<div/>);
+        return (<></>);
     }
 }
