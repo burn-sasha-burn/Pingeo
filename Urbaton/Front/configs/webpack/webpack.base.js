@@ -10,6 +10,9 @@ const projectModulesStyles = require('./presets/projectModulesStyles');
 const projectGlobalStyles = require('./presets/projectGlobalStyles');
 const projectAssets = require('./presets/projectAssets');
 
+const libGlobalStyles = require('./presets/libGlobalStyles');
+const libAssets = require('./presets/libAssets');
+
 const konturRetailUiCode = require('./presets/konturRetailUiCode');
 const konturRetailUiStyles = require('./presets/konturRetailUiStyles');
 const konturRetailUiAssets = require('./presets/konturRetailUiAssets');
@@ -36,6 +39,9 @@ module.exports = function (options) {
                     projectModulesStyles(options.cssClassNames),
                     projectGlobalStyles(),
                     projectAssets(options.imageNames),
+
+                    libGlobalStyles(),
+                    libAssets(),
 
                     konturRetailUiCode(),
                     konturRetailUiStyles(),
