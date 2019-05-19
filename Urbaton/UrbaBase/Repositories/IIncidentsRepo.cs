@@ -7,6 +7,6 @@ namespace UrbaBase.Repositories
     {
         IEnumerable<IncidentDocument> Get();
         IncidentDocument Get(string id);
-        bool Save(IncidentDocument document);
+        bool Upsert(IncidentDocument document);
     }
 }

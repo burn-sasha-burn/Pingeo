@@ -8,7 +8,7 @@ namespace UrbaBase.Repositories
         [NotNull]
         UserStateDocument Get(int userId);
 
-        void Update([NotNull] UserStateDocument document);
+        void Upsert([NotNull] UserStateDocument document);
 
         void Delete(int userId);
     }

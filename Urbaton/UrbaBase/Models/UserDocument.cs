@@ -6,5 +6,11 @@ namespace UrbaBase.Models
     {
         [JsonProperty("nick")]
         public string Nick { get; set; }
+
+        [JsonProperty("fileId")]
+        public string FileId { get; set; }
+
+        [JsonProperty("description")]
+        public string Description { get; set; }
     }
 }

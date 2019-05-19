@@ -24,43 +24,44 @@ namespace Front.Api
         [HttpGet]
         public HttpResponseMessage Get()
         {
-            var incidents = new List<IncidentDocument>
-            {
-                new IncidentDocument
-                {
-                    Id = Guid.Parse("9d72028b-bbe1-4ca1-95c0-a4883dee33e0"),
-                    DateTime = DateTime.UtcNow,
-                    Creator = new UserDocument {Nick = "Superman"},
-                    Location = new LocationDocument {Latitude = 21d, Longitude = 22d},
-                    Description = "garbage on fire",
-                    Status = StatusDocument.New
-                },
-                new IncidentDocument()
-                {
-                    Id = Guid.Parse("9f9172f4-55bb-49dd-8a44-151383033a7d"),
-                    DateTime = DateTime.UtcNow,
-                    Creator = new UserDocument {Nick = "Batman"},
-                    Location = new LocationDocument {Latitude = 53d, Longitude = 50d},
-                    Description = "Здесь стройка. Просто стройкахаахахахахахахха",
-                    Status = StatusDocument.New
-                }
-            };
+//            var incidents = new List<IncidentDocument>
+//            {
+//                new IncidentDocument
+//                {
+//                    Id = Guid.Parse("9d72028b-bbe1-4ca1-95c0-a4883dee33e0"),
+//                    DateTime = DateTime.UtcNow,
+//                    Creator = new UserDocument {Nick = "Superman"},
+//                    Location = new LocationDocument {Latitude = 21d, Longitude = 22d},
+//                    Description = "garbage on fire",
+//                    Status = StatusDocument.New
+//                },
+//                new IncidentDocument()
+//                {
+//                    Id = Guid.Parse("9f9172f4-55bb-49dd-8a44-151383033a7d"),
+//                    DateTime = DateTime.UtcNow,
+//                    Creator = new UserDocument {Nick = "Batman"},
+//                    Location = new LocationDocument {Latitude = 53d, Longitude = 50d},
+//                    Description = "Здесь стройка. Просто стройкахаахахахахахахха",
+//                    Status = StatusDocument.New
+//                }
+//            };
+//
+//            for (var i = 0; i < 150; i++)
+//            {
+//                incidents.Add(new IncidentDocument()
+//                    {
+//                        Id = Guid.NewGuid(),
+//                        Location = new LocationDocument() {Longitude = RandomCoordDiff(0.1f / 2, 53.2035477f), Latitude = RandomCoordDiff(0.1f, 50.2188443f)},
+//                        Description = "Рондомоный инцедент " + i,
+//                        DateTime = DateTime.UtcNow,
+//                        Creator = new UserDocument {Nick = "Batman"},
+//                        Status = StatusDocument.New
+//                    }
+//                );
+//            }
 
-            for (var i = 0; i < 150; i++)
-            {
-                incidents.Add(new IncidentDocument()
-                    {
-                        Id = Guid.NewGuid(),
-                        Location = new LocationDocument() {Longitude = RandomCoordDiff(0.1f / 2, 53.2035477f), Latitude = RandomCoordDiff(0.1f, 50.2188443f)},
-                        Description = "Рондомоный инцедент " + i,
-                        DateTime = DateTime.UtcNow,
-                        Creator = new UserDocument {Nick = "Batman"},
-                        Status = StatusDocument.New
-                    }
-                );
-            }
-
-            return Request.CreateResponse(HttpStatusCode.OK, incidents);
+            return Request.CreateResponse(HttpStatusCode.OK, _incidentRepo.Get());
+//            return Request.CreateResponse(HttpStatusCode.OK, incidents);
         }
 
         [HttpPost]
@@ -76,7 +77,7 @@ namespace Front.Api
                 Status = StatusDocument.New
             };
 
-            var result = _incidentRepo.Save(incident);
+            var result = _incidentRepo.Upsert(incident);
 
             return Request.CreateResponse(HttpStatusCode.OK);
         }

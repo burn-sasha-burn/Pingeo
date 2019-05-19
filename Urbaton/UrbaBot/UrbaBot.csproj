@@ -50,6 +50,7 @@
     <Compile Include="Commands.cs" />
     <Compile Include="BotSettings.cs" />
     <Compile Include="Command.cs" />
+    <Compile Include="Commands.soso.cs" />
     <Compile Include="IMessageHandlers.cs" />
     <Compile Include="MessageHandlers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
