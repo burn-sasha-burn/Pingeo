@@ -9,6 +9,7 @@ namespace Front
         {
             var telegramBot = container.GetInstance<ITelegramBot>();
             telegramBot.SetupWebhookAsync().Wait();
+            telegramBot.Client.StartReceiving();
         }
     }
 }

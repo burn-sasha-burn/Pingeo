@@ -5,6 +5,8 @@ namespace UrbaBot
 {
     public interface ITelegramBot
     {
+        TelegramBotClient Client { get; }
+
         Task SetupWebhookAsync();
         Task<byte[]> DownloadFile(string fileId);
         TelegramBotClient GetClient();
