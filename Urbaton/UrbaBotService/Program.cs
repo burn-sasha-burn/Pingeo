@@ -37,38 +37,7 @@ namespace UrbaBotService
             var message = messageEventArgs.Message;
             if (message == null || message.Type != MessageType.Text) return;
 
-            switch (message.Text.Split(' ').First())
-            {
-                case "/start":
-                    await Bot.SendChatActionAsync(message.Chat.Id, ChatAction.Typing);
-                    await Task.Delay(500); // simulate longer running task
-
-                    var inlineKeyboard = new InlineKeyboardMarkup(new[]
-                    {
-                        new [] // first row
-                        {
-                            InlineKeyboardButton.WithCallbackData("Создать", "/create"),
-                            InlineKeyboardButton.WithCallbackData("Посмотреть", "/show"),
-                        }
-                    });
-
-                    await Bot.SendTextMessageAsync(message.Chat.Id, "Что новенького в городе?", replyMarkup: inlineKeyboard);
-                    break;
-
-                case "/create":
-                    CreateLocation(message.Chat.Id);
-                    break;
-
-                default:
-                    const string usage = @"
-                    Usage:
-                    /start   - Начать общение
-                    /create - Создать индицент
-                    /show    - Посмотреть индиценты";
-
-                    await Bot.SendTextMessageAsync(message.Chat.Id, usage, replyMarkup: new ReplyKeyboardRemove());
-                    break;
-            }
+            await MessageHandlers.ReceiveText(Bot, message);
         }
 
         private static async void BotOnCallbackQueryReceived(object sender, CallbackQueryEventArgs callbackQueryEventArgs)
@@ -80,7 +49,7 @@ namespace UrbaBotService
             {
                 // request location or contact
                 case "/create":
-                    CreateLocation(callbackQuery.Message.Chat.Id);
+                    await Commands.CreateLocation(Bot, callbackQuery.Message.Chat.Id);
                     break;
             }
 
@@ -91,12 +60,6 @@ namespace UrbaBotService
             //await Bot.SendTextMessageAsync(
             //    callbackQuery.Message.Chat.Id,
             //    $"Received {callbackQuery.Data}");
-        }
-
-        private static async void CreateLocation(long chatId)
-        {
-            var RequestReplyKeyboard = new ReplyKeyboardMarkup(new[] { KeyboardButton.WithRequestLocation("Сообщить мое местоположение") });
-            await Bot.SendTextMessageAsync(chatId, "А это где расположено?", replyMarkup: RequestReplyKeyboard);
         }
 
         private static async void BotOnInlineQueryReceived(object sender, InlineQueryEventArgs inlineQueryEventArgs)

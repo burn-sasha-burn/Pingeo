@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -32,65 +34,17 @@ namespace Front.Api
         [Route(BotSettings.HookResponse)]
         public async Task<IHttpActionResult> Post([FromBody] Update update)
         {
-//            var photos = update.Message.Photo;
-//            if (photos.Any())
-//            {
-//                var fileId = photos[3].FileId;
-//                var bytes = await _telegramBot.DownloadFile(fileId);
-//                await _filesRepo.Save(fileId, bytes);
-//            }
-
-            if (update.Message.Text.ToUpper().Contains("/START"))
+            var photos = update.Message.Photo;
+            if (photos != null && photos.Any())
             {
-                await Start(update.Message.Chat.Id);
+                var fileId = photos[photos.Length - 1].FileId;
+                var bytes = await _telegramBot.DownloadFile(fileId);
+                await _filesRepo.Save(fileId, bytes);
             }
 
-            if (update.Message.Text.ToUpper().Contains("/CREATE"))
-            {
-                await Create(update);
-            }
+            await MessageHandlers.ReceiveText(_telegramBot.Client, update.Message);
 
             return Ok();
-        }
-
-        private async Task Start(long chatId)
-        {
-            var rkm = new ReplyKeyboardMarkup();
-
-            rkm.Keyboard =
-                new KeyboardButton[][]
-                {
-                    new KeyboardButton[]
-                    {
-                        new KeyboardButton("Создать инцидент"),
-                        new KeyboardButton("Посмотреть инцидент")
-                    },
-                };
-
-            InlineKeyboardButton createButton = new InlineKeyboardButton
-            {
-                Text = "Создать инцидент",
-                CallbackData = "/create"
-            };
-
-            InlineKeyboardButton showButton = new InlineKeyboardButton
-            {
-                Text = "Просмотреть инцидент",
-                CallbackData = "/show"
-            };
-
-            List<InlineKeyboardButton> rowBottons = new List<InlineKeyboardButton>();
-            rowBottons.Add(createButton);
-            rowBottons.Add(showButton);
-
-            InlineKeyboardMarkup ikm = new InlineKeyboardMarkup(rowBottons);
-
-            await _telegramBot.GetClient().SendTextMessageAsync(chatId, "Как дела в городе?", replyMarkup: ikm);
-        }
-
-        private async Task Create(Update update)
-        {
-            await _telegramBot.GetClient().SendTextMessageAsync(update.Message.Chat.Id, "Опять трабл в городе, а где?");
         }
 
         //private async void BotOnMessageReceived(object sender, MessageEventArgs messageEventArgs)
