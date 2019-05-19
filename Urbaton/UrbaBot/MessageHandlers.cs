@@ -30,7 +30,7 @@ namespace UrbaBot
 
         public async Task ReceiveText(Message message, CallbackQuery callbackQuery = null)
         {
-            var text = !string.IsNullOrEmpty(message.Text) ? message.Text : callbackQuery?.Data;
+            var text = message != null && !string.IsNullOrEmpty(message.Text) ? message.Text : callbackQuery?.Data;
 
             if (text.Contains(':'))
             {
