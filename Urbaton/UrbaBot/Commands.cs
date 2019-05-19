@@ -7,7 +7,7 @@ using UrbaBase.Documents;
 
 namespace UrbaBot
 {
-    public static class Commands
+    public static partial class Commands
     {
         public const string Start = "/start";
         public const string Create = "/create";
@@ -16,6 +16,8 @@ namespace UrbaBot
         public const string Achieve = "/achieve";
         public const string About = "/about";
         public const string Event = "/event";
+        public const string DonateCommand = "/donate";
+        public const string SponsorCommand = "/sponsor";
 
         public static async Task HandleStart(this ITelegramBotClient client, long chatId)
         {
