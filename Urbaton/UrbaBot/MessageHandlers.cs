@@ -155,14 +155,11 @@ namespace UrbaBot
 
                 case Commands.My:
                     await client.ShowMy(_incidentRepo.Get().Where(x => x.Creator.Nick == message.From.Username), chatId);
-
                     break;
 
                 case Commands.Achieve:
                     await client.ShowAchieve(_incidentRepo.Get().Where(x => x.Creator.Nick == message.From.Username), chatId);
-
                     break;
-                }
 
                 case Commands.Show:
                     await client.CreateMsg(chatId, "http://pingeo.ru");
