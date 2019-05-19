@@ -9,5 +9,8 @@ namespace UrbaBase.Models
 
         [JsonProperty("fileId")]
         public string FileId { get; set; }
+
+        [JsonProperty("description")]
+        public string Description { get; set; }
     }
 }

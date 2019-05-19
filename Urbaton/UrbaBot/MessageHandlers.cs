@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
 using UrbaBase.Documents;
 using UrbaBase.Models;
 using UrbaBase.Repositories;
@@ -52,8 +53,9 @@ namespace UrbaBot
         private async Task HandleParametrized(Message message, string text, string parameter)
         {
             var client = _telegramBot.Client;
-            var userState = _userStateRepo.Get(message.From.Id);
+            var userId = message.From.Id;
             var chatId = message.Chat.Id;
+            var userState = _userStateRepo.Get(userId);
 
             switch (text)
             {
@@ -71,6 +73,7 @@ namespace UrbaBot
                         return;
                     }
 
+                    userState = new UserStateDocument {UserId = userId};
                     userState.Command = Commands.Event;
                     userState.IncidentId = Guid.Parse(parameter);
                     _userStateRepo.Upsert(userState);
@@ -117,6 +120,7 @@ namespace UrbaBot
                         return;
                     }
 
+                    userState = new UserStateDocument {UserId = userId};
                     userState.Command = Commands.Report;
                     userState.IncidentId = Guid.Parse(parameter);
                     _userStateRepo.Upsert(userState);
@@ -129,8 +133,9 @@ namespace UrbaBot
         private async Task Handle(Message message, string text)
         {
             var client = _telegramBot.Client;
-            var userState = _userStateRepo.Get(message.From.Id);
+            var userId = message.From.Id;
             var chatId = message.Chat.Id;
+            var userState = _userStateRepo.Get(userId);
 
             switch (text)
             {
@@ -142,21 +147,25 @@ namespace UrbaBot
                     break;
 
                 case Commands.Create:
+                    userState = new UserStateDocument {UserId = userId};
                     userState.Command = Commands.Create;
                     _userStateRepo.Upsert(userState);
                     await client.CreatePhoto(chatId);
                     break;
 
                 case Commands.My:
-                    var myIncidents = _incidentRepo.Get().Where(x => x.Creator.Nick == message.From.Username);
+                {
+                    var nick = message.From.Username;
+                    var myIncidents = _incidentRepo.Get().Where(x => x.Creator.Nick == nick);
                     await client.ShowMy(myIncidents, chatId);
 
                     break;
-
+                }
                 default:
                     switch (userState.Command)
                     {
                         case Commands.Create:
+                        {
                             var photos = message.Photo;
                             if (photos?.Length > 0)
                             {
@@ -221,16 +230,18 @@ namespace UrbaBot
                             await client.CreateEvent(chatId, incidentId);
 
                             break;
-
+                        }
                         case Commands.Event:
+                        {
                             var incident = _incidentRepo.Get(userState.IncidentId.ToString());
                             incident.DateTime = userState.DateTime;
                             incident.Description = text;
                             incident.Status = StatusDocument.Process;
                             _incidentRepo.Upsert(incident);
                             break;
-
+                        }
                         case Commands.Report:
+                        {
                             var reportPhotos = message.Photo;
                             if (reportPhotos?.Length > 0)
                             {
@@ -252,12 +263,26 @@ namespace UrbaBot
                                 userState.Text = text;
                                 _userStateRepo.Upsert(userState);
                             }
-                            
+
                             if (string.IsNullOrEmpty(userState.Text))
                             {
                                 await client.CreateText(chatId);
                                 return;
                             }
+
+                            var nick = message.From.Username;
+                            var incident = _incidentRepo.Get(userState.IncidentId.ToString());
+                            var meetupUser = incident.MeetupUsers.FirstOrDefault(user => user.Nick == nick);
+                            if (meetupUser != null)
+                            {
+                                meetupUser.FileId = userState.FileId;
+                                meetupUser.Description = userState.Text;
+                                _incidentRepo.Upsert(incident);
+                            }
+
+                            break;
+                        }
+                        default:
 
 
                             const string usage = @"
@@ -267,7 +292,10 @@ namespace UrbaBot
                     /show    - Посмотреть индиценты
                     /my - Мои инциденты и мероприятия";
 
-                    await client.SendTextMessageAsync(chatId, usage, replyMarkup: new ReplyKeyboardRemove());
+                            await client.SendTextMessageAsync(chatId, usage, replyMarkup: new ReplyKeyboardRemove());
+                            break;
+                    }
+
                     break;
             }
         }
