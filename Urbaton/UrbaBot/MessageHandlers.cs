@@ -30,7 +30,7 @@ namespace UrbaBot
 
         public async Task ReceiveText(Message message)
         {
-            var text = message.Text;
+            var text = message.Text.ToLower();
 
             if (text.Contains(':'))
             {
@@ -93,6 +93,18 @@ namespace UrbaBot
                     await client.CreatePhoto(chatId);
                     userState.Command = Commands.Create;
                     _userStateRepo.Update(userState);
+                    break;
+
+                case Commands.About:
+                    await client.AboutService(chatId);
+                    break;
+
+                case Commands.SponsorCommand:
+                    await client.Sponsor(chatId);
+                    break;
+
+                case Commands.DonateCommand:
+                    await client.Donate(chatId);
                     break;
 
                 default:
