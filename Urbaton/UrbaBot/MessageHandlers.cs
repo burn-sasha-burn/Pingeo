@@ -32,12 +32,29 @@ namespace UrbaBot
         {
             var text = message?.Text?.ToLower() ?? callbackQuery?.Data;
 
+            int userId;
+            long chatId;
+            string nick;
+            if (message == null)
+            {
+                userId = callbackQuery.From.Id;
+                chatId = callbackQuery.Message.Chat.Id;
+                nick = callbackQuery.From.Username;
+            }
+            else
+            {
+                userId = message.From.Id;
+                chatId = message.Chat.Id;
+                nick = message.From.Username;
+            }
+
+
             if (text?.Contains('_') ?? false)
             {
                 var rule = text.Split('_');
                 if (rule.Length == 2)
                 {
-                    await HandleParametrized(message, rule[0], rule[1]);
+                    await HandleParametrized(userId, chatId, nick, rule[0], rule[1]);
                 }
                 else
                 {
@@ -46,15 +63,13 @@ namespace UrbaBot
             }
             else
             {
-                await Handle(message, text);
+                await Handle(userId, chatId, nick, message?.Photo, message?.Location, text);
             }
         }
 
-        private async Task HandleParametrized(Message message, string text, string parameter)
+        private async Task HandleParametrized(int userId, long chatId, string nick, string text, string parameter)
         {
             var client = _telegramBot.Client;
-            var userId = message.From.Id;
-            var chatId = message.Chat.Id;
             var userState = _userStateRepo.Get(userId);
 
             switch (text)
@@ -91,7 +106,6 @@ namespace UrbaBot
                     break;
                 case Commands.Subscribe:
                 {
-                    var nick = message.From.Username;
                     var incident = _incidentRepo.Get(parameter);
                     if (incident.MeetupUsers.Any(user => user.Nick == nick))
                     {
@@ -110,7 +124,6 @@ namespace UrbaBot
                 }
                 case Commands.Report:
                 {
-                    var nick = message.From.Username;
                     var incident = _incidentRepo.Get(parameter);
                     var meetupUser = incident.MeetupUsers.FirstOrDefault(user => user.Nick == nick);
                     if (meetupUser == null)
@@ -130,11 +143,9 @@ namespace UrbaBot
             }
         }
 
-        private async Task Handle(Message message, string text)
+        private async Task Handle(int userId, long chatId, string nick, PhotoSize[] photos, Location location, string text)
         {
             var client = _telegramBot.Client;
-            var userId = message.From.Id;
-            var chatId = message.Chat.Id;
             var userState = _userStateRepo.Get(userId);
 
             switch (text)
@@ -154,11 +165,11 @@ namespace UrbaBot
                     break;
 
                 case Commands.My:
-                    await client.ShowMy(_incidentRepo.Get().Where(x => x.Creator.Nick == message.From.Username), chatId);
+                    await client.ShowMy(_incidentRepo.Get().Where(x => x.Creator.Nick == nick), chatId);
                     break;
 
                 case Commands.Achieve:
-                    await client.ShowAchieve(_incidentRepo.Get().Where(x => x.Creator.Nick == message.From.Username), chatId);
+                    await client.ShowAchieve(_incidentRepo.Get().Where(x => x.Creator.Nick == nick), chatId);
                     break;
 
                 case Commands.Show:
@@ -182,7 +193,6 @@ namespace UrbaBot
                     {
                         case Commands.Create:
                         {
-                            var photos = message.Photo;
                             if (photos?.Length > 0)
                             {
                                 var fileId = photos[photos.Length - 1].FileId;
@@ -198,12 +208,12 @@ namespace UrbaBot
                                 return;
                             }
 
-                            if (message.Location != null)
+                            if (location != null)
                             {
                                 userState.Location = new LocationDocument
                                 {
-                                    Latitude = message.Location.Latitude,
-                                    Longitude = message.Location.Longitude,
+                                    Latitude = location.Latitude,
+                                    Longitude = location.Longitude,
                                 };
                                 _userStateRepo.Upsert(userState);
                             }
@@ -229,7 +239,7 @@ namespace UrbaBot
                             var incidentId = Guid.NewGuid();
                             var user = new UserDocument
                             {
-                                Nick = message.From.Username
+                                Nick = nick
                             };
 
                             _incidentRepo.Upsert(new IncidentDocument
@@ -249,7 +259,7 @@ namespace UrbaBot
                         }
                         case Commands.Event:
                         {
-                            var incident = _incidentRepo.Get(userState.IncidentId.ToString());
+                            var incident = _incidentRepo.Get(userState.IncidentId);
                             incident.DateTime = userState.DateTime;
                             incident.Description = text;
                             incident.Status = StatusDocument.Process;
@@ -258,10 +268,9 @@ namespace UrbaBot
                         }
                         case Commands.Report:
                         {
-                            var reportPhotos = message.Photo;
-                            if (reportPhotos?.Length > 0)
+                            if (photos?.Length > 0)
                             {
-                                var fileId = reportPhotos[reportPhotos.Length - 1].FileId;
+                                var fileId = photos[photos.Length - 1].FileId;
                                 var bytes = await _telegramBot.DownloadFile(fileId);
                                 await _filesRepo.Save(fileId, bytes);
                                 userState.FileId = fileId;
@@ -286,7 +295,6 @@ namespace UrbaBot
                                 return;
                             }
 
-                            var nick = message.From.Username;
                             var incident = _incidentRepo.Get(userState.IncidentId.ToString());
                             var meetupUser = incident.MeetupUsers.FirstOrDefault(user => user.Nick == nick);
                             if (meetupUser != null)
