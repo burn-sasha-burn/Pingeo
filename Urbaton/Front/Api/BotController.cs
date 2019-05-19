@@ -30,7 +30,7 @@ namespace Front.Api
 
         [HttpPost]
         [Route(BotSettings.HookResponse)]
-        public HttpResponseMessage Post([FromBody] Update update)
+        public async Task<IHttpActionResult> Post([FromBody] Update update)
         {
 //            var photos = update.Message.Photo;
 //            if (photos.Any())
@@ -42,18 +42,18 @@ namespace Front.Api
 
             if (update.Message.Text.ToUpper().Contains("/START"))
             {
-                //Start(update.Message.Chat.Id);
+                await Start(update.Message.Chat.Id);
             }
 
             if (update.Message.Text.ToUpper().Contains("/CREATE"))
             {
-                //Create(update);
+                await Create(update);
             }
 
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            return Ok();
         }
 
-        private void Start(long chatId)
+        private async Task Start(long chatId)
         {
             var rkm = new ReplyKeyboardMarkup();
 
@@ -85,12 +85,12 @@ namespace Front.Api
 
             InlineKeyboardMarkup ikm = new InlineKeyboardMarkup(rowBottons);
 
-            _telegramBot.GetClient().SendTextMessageAsync(chatId, "Как дела в городе?", replyMarkup: ikm);
+            await _telegramBot.GetClient().SendTextMessageAsync(chatId, "Как дела в городе?", replyMarkup: ikm);
         }
 
-        private void Create(Update update)
+        private async Task Create(Update update)
         {
-            _telegramBot.GetClient().SendTextMessageAsync(update.Message.Chat.Id, "Опять трабл в городе, а где?");
+            await _telegramBot.GetClient().SendTextMessageAsync(update.Message.Chat.Id, "Опять трабл в городе, а где?");
         }
 
         //private async void BotOnMessageReceived(object sender, MessageEventArgs messageEventArgs)
