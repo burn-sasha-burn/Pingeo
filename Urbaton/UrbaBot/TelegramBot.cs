@@ -1,3 +1,4 @@
+using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using Telegram.Bot;
@@ -6,21 +7,31 @@ namespace UrbaBot
 {
     public class TelegramBot : ITelegramBot
     {
-        private readonly TelegramBotClient _botClient;
+        public TelegramBotClient Client { get; }
 
         public TelegramBot()
         {
-            _botClient = new TelegramBotClient(BotSettings.Key, new WebProxy("95.85.25.124:4444"));
+            Client = new TelegramBotClient(BotSettings.Key, new WebProxy("95.85.25.124:4444"));
         }
 
         public Task SetupWebhookAsync()
         {
-            return _botClient.SetWebhookAsync($"{BotSettings.DomainUrl}/{BotSettings.HookResponse}");
+            return Client.SetWebhookAsync($"{BotSettings.DomainUrl}/{BotSettings.HookResponse}");
+        }
+
+        public async Task<byte[]> DownloadFile(string fileId)
+        {
+            var file = await Client.GetFileAsync(fileId);
+            using (var stream = new MemoryStream())
+            {
+                await Client.DownloadFileAsync(file.FilePath, stream);
+                return stream.GetBuffer();
+            }
         }
 
         public TelegramBotClient GetClient()
         {
-            return _botClient;
+            return Client;
         }
     }
 }

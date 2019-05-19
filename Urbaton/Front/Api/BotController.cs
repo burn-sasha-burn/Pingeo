@@ -9,6 +9,7 @@ using Telegram.Bot.Args;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using UrbaBase.Repositories;
 using UrbaBot;
 
 namespace Front.Api
@@ -16,10 +17,13 @@ namespace Front.Api
     public class BotController : ApiController
     {
         private readonly ITelegramBot _telegramBot;
+        private readonly IFilesRepo _filesRepo;
 
-        public BotController(ITelegramBot telegramBot)
+        public BotController(ITelegramBot telegramBot,
+                             IFilesRepo filesRepo)
         {
             _telegramBot = telegramBot;
+            _filesRepo = filesRepo;
             //_telegramBot.GetClient().OnMessage += BotOnMessageReceived;
             //_telegramBot.GetClient().OnCallbackQuery += BotOnCallbackQueryReceived;
         }
@@ -28,6 +32,14 @@ namespace Front.Api
         [Route(BotSettings.HookResponse)]
         public HttpResponseMessage Post([FromBody] Update update)
         {
+//            var photos = update.Message.Photo;
+//            if (photos.Any())
+//            {
+//                var fileId = photos[3].FileId;
+//                var bytes = await _telegramBot.DownloadFile(fileId);
+//                await _filesRepo.Save(fileId, bytes);
+//            }
+
             if (update.Message.Text.ToUpper().Contains("/START"))
             {
                 //Start(update.Message.Chat.Id);
@@ -93,11 +105,11 @@ namespace Front.Api
         //{
         //    if (callbackQueryEventArgs.CallbackQuery.Data.Equals("/create"))
         //    {
-               
+
         //    }
         //    else if (callbackQueryEventArgs.CallbackQuery.Data.Equals("ingredients"))
         //    {
-               
+
         //    }
         //}
     }
