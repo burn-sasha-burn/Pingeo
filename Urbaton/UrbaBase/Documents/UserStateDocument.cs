@@ -1,6 +1,7 @@
 using System;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using UrbaBase.Models;
 using UrbaBase.Mongo;
 
 namespace UrbaBase.Documents
@@ -13,7 +14,9 @@ namespace UrbaBase.Documents
 
         public string Command { get; set; }
 
-        public string Description { get; set; }
+        public string Text { get; set; }
+
+        public LocationDocument Location { get; set; }
 
         public string FileId { get; set; }
 

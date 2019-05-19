@@ -1,35 +1,82 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot;
-using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;
 
 namespace UrbaBot
 {
     public static class Commands
     {
-        public static async Task Start(ITelegramBotClient client, long chatId)
+        public const string Start = "/start";
+        public const string Create = "/create";
+        public const string Show = "/show";
+        public const string My = "/my";
+        public const string Achieve = "/achieve";
+        public const string About = "/about";
+        public const string Event = "/event";
+
+        public static async Task HandleStart(this ITelegramBotClient client, long chatId)
         {
             var inlineKeyboard = new InlineKeyboardMarkup(new[]
             {
-                new [] // first row
+                new[]
                 {
-                    InlineKeyboardButton.WithCallbackData("Создать", "/create"),
-                    InlineKeyboardButton.WithCallbackData("Посмотреть", "/show"),
+                    InlineKeyboardButton.WithCallbackData("Сообщить об инциденте", Create),
+                    InlineKeyboardButton.WithCallbackData("Карта инцидентов", Show),
+                    InlineKeyboardButton.WithCallbackData("Мои инциденты", My),
+                    InlineKeyboardButton.WithCallbackData("Мои достижения", Achieve),
+                    InlineKeyboardButton.WithCallbackData("О сервисе", About)
                 }
             });
 
             await client.SendTextMessageAsync(chatId, "Как дела в городе?", replyMarkup: inlineKeyboard);
         }
 
-        public static async Task CreateLocation(ITelegramBotClient client, long chatId)
+        public static async Task CreatePhoto(this ITelegramBotClient client, long chatId)
         {
-            var RequestReplyKeyboard = new ReplyKeyboardMarkup(new[] { KeyboardButton.WithRequestLocation("Сообщить мое местоположение") });
-            await client.SendTextMessageAsync(chatId, "А это где расположено?", replyMarkup: RequestReplyKeyboard);
+            await client.SendTextMessageAsync(chatId, "Добавьте фотографию");
         }
 
+        public static async Task CreateLocation(this ITelegramBotClient client, long chatId)
+        {
+            var requestReplyKeyboard = new ReplyKeyboardMarkup(new[] {KeyboardButton.WithRequestLocation("Сообщить мое местоположение")});
+            await client.SendTextMessageAsync(chatId, "Отметьте местоположение", replyMarkup: requestReplyKeyboard);
+        }
+
+        public static async Task CreateDescription(this ITelegramBotClient client, long chatId)
+        {
+            await client.SendTextMessageAsync(chatId, "Введите описание");
+        }
+
+        public static async Task CreateEvent(this ITelegramBotClient client, long chatId, Guid incidentId)
+        {
+            var inlineKeyboard = new InlineKeyboardMarkup(new[]
+            {
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData("Создать мероприятие", $"{Event}:{incidentId}")
+                }
+            });
+
+            await client.SendTextMessageAsync(chatId, string.Empty, replyMarkup: inlineKeyboard);
+        }
+
+        public static async Task CreateDay(this ITelegramBotClient client, long chatId)
+        {
+            var dateTime = DateTime.Today;
+
+            var inlineKeyboard = new InlineKeyboardMarkup(new[]
+            {
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(1).Day.ToString(), "/day:1"),
+                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(2).Day.ToString(), "/day:2"),
+                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(3).Day.ToString(), "/day:3"),
+                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(4).Day.ToString(), "/day:4")
+                }
+            });
+
+            await client.SendTextMessageAsync(chatId, "Как дела в городе?", replyMarkup: inlineKeyboard);
+        }
     }
 }

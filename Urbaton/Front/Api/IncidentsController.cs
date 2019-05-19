@@ -29,9 +29,8 @@ namespace Front.Api
                 new IncidentDocument
                 {
                     Id = Guid.Parse("9d72028b-bbe1-4ca1-95c0-a4883dee33e0"),
-                    CreationDate = DateTime.UtcNow,
+                    DateTime = DateTime.UtcNow,
                     Creator = new UserDocument {Nick = "Superman"},
-                    CustomText = "fly like a red bullit",
                     Location = new LocationDocument {Latitude = 21d, Longitude = 22d},
                     Description = "garbage on fire",
                     Status = StatusDocument.New
@@ -39,9 +38,8 @@ namespace Front.Api
                 new IncidentDocument()
                 {
                     Id = Guid.Parse("9f9172f4-55bb-49dd-8a44-151383033a7d"),
-                    CreationDate = DateTime.UtcNow,
+                    DateTime = DateTime.UtcNow,
                     Creator = new UserDocument {Nick = "Batman"},
-                    CustomText = "have to work it out",
                     Location = new LocationDocument {Latitude = 53d, Longitude = 50d},
                     Description = "Здесь стройка. Просто стройкахаахахахахахахха",
                     Status = StatusDocument.New
@@ -55,9 +53,8 @@ namespace Front.Api
                         Id = Guid.NewGuid(),
                         Location = new LocationDocument() {Longitude = RandomCoordDiff(0.1f / 2, 53.2035477f), Latitude = RandomCoordDiff(0.1f, 50.2188443f)},
                         Description = "Рондомоный инцедент " + i,
-                        CreationDate = DateTime.UtcNow,
+                        DateTime = DateTime.UtcNow,
                         Creator = new UserDocument {Nick = "Batman"},
-                        CustomText = "have to work it out",
                         Status = StatusDocument.New
                     }
                 );
@@ -72,9 +69,8 @@ namespace Front.Api
             var incident = new IncidentDocument
             {
                 Id = new Guid(),
-                CreationDate = DateTime.UtcNow,
+                DateTime = DateTime.UtcNow,
                 Creator = new UserDocument {Nick = "Superman"},
-                CustomText = "fly like a red bullit",
                 Location = new LocationDocument {Latitude = 21d, Longitude = 22d},
                 Description = "garbage on fire",
                 Status = StatusDocument.New
