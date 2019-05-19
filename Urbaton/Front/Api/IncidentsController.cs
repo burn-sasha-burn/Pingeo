@@ -69,7 +69,7 @@ namespace Front.Api
         {
             var incident = new IncidentDocument
             {
-                Id = new Guid(),
+                Id = Guid.NewGuid().ToString("N"),
                 DateTime = DateTime.UtcNow,
                 Creator = new UserDocument {Nick = "Superman"},
                 Location = new LocationDocument {Latitude = 21d, Longitude = 22d},
@@ -77,7 +77,7 @@ namespace Front.Api
                 Status = StatusDocument.New
             };
 
-            var result = _incidentRepo.Save(incident);
+            var result = _incidentRepo.Upsert(incident);
 
             return Request.CreateResponse(HttpStatusCode.OK);
         }

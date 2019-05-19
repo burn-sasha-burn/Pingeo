@@ -12,9 +12,9 @@ namespace UrbaBase.Documents
     public class IncidentDocument
     {
         [BsonId]
-        [BsonRepresentation(BsonType.String)]
+//        [BsonRepresentation(BsonType.String)]
         [JsonProperty("id")]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         [JsonProperty("situation")]
         public string Situation { get; set; }
@@ -30,7 +30,7 @@ namespace UrbaBase.Documents
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
         [JsonProperty("dateTime")]
-        public DateTime DateTime { get; set; }
+        public DateTime? DateTime { get; set; }
 
         [JsonProperty("creator")]
         public UserDocument Creator { get; set; }
@@ -39,6 +39,6 @@ namespace UrbaBase.Documents
         public string FileId { get; set; }
 
         [JsonProperty("meetupUsers")]
-        public IEnumerable<UserDocument> MeetupUsers { get; set; }
+        public ICollection<UserDocument> MeetupUsers { get; set; }
     }
 }

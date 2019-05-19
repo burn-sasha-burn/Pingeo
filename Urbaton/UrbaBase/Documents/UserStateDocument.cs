@@ -21,6 +21,9 @@ namespace UrbaBase.Documents
         public string FileId { get; set; }
 
         [BsonRepresentation(BsonType.String)]
-        public Guid IncidentId { get; set; }
+        public string IncidentId { get; set; }
+
+        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
+        public DateTime DateTime { get; set; }
     }
 }

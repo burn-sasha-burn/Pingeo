@@ -5,6 +5,6 @@ namespace UrbaBot
 {
     public interface IMessageHandlers
     {
-        Task ReceiveText(Message message);
+        Task ReceiveText(Message message, CallbackQuery callbackQuery = null);
     }
 }

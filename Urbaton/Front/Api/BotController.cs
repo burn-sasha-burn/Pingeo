@@ -18,11 +18,10 @@ namespace Front.Api
 
         [HttpPost]
         [Route(BotSettings.HookResponse)]
-        public async Task<HttpResponseMessage> Post([FromBody] Update update)
+        public async Task<IHttpActionResult> Post([FromBody] Update update)
         {
-            await _messageHandlers.ReceiveText(update.Message);
-
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            await _messageHandlers.ReceiveText(update.Message, update.CallbackQuery);
+            return Ok();
         }
     }
 }

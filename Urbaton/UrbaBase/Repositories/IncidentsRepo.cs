@@ -18,8 +18,7 @@ namespace UrbaBase.Repositories
 
         public IncidentDocument Get(string id)
         {
-            var document = GetDocument(id);
-            return document == null ? null : document;
+            return GetDocument(id);
         }
 
         private IncidentDocument Get(Guid id)
@@ -29,10 +28,9 @@ namespace UrbaBase.Repositories
 
         private IncidentDocument GetDocument(string id)
         {
-            if (string.IsNullOrWhiteSpace(id))
-                return null;
-
-            return _incidentCollection.FindOneById(id);
+            return string.IsNullOrWhiteSpace(id)
+                ? null
+                : _incidentCollection.FindOneById(id);
         }
 
         public IEnumerable<IncidentDocument> Get()
@@ -40,7 +38,7 @@ namespace UrbaBase.Repositories
             return _incidentCollection.AsQueryable().ToArray();
         }
 
-        public bool Save(IncidentDocument document)
+        public bool Upsert(IncidentDocument document)
         {
             if (document == null)
                 return false;
@@ -65,7 +63,7 @@ namespace UrbaBase.Repositories
 
         private bool UpdateDocument(IncidentDocument document)
         {
-            var result = _incidentCollection.ReplaceOne(x => x.Id == document.Id, document, new UpdateOptions { IsUpsert = true });
+            var result = _incidentCollection.ReplaceOne(x => x.Id == document.Id, document, new UpdateOptions {IsUpsert = true});
             return result.IsAcknowledged;
         }
     }
