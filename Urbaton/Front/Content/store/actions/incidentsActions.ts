@@ -31,13 +31,14 @@ export function generateIncidents(point: IPoint) {
             creationDate: new Date().toISOString(),
             creator: {nick: 'noone'},
             customText: 'asdf',
-            image: {fileId: 'AgADAgADQKoxGzO8CUutQ9XN2l_gbc49hA8ABMtu0GGOnqcezNwAAgI'},
+            fileId: 'AgADAgADQKoxGzO8CUutQ9XN2l_gbc49hA8ABMtu0GGOnqcezNwAAgI',
             location: {
                 lat: point.lat + (Math.random() - 0.5) * 0.02 / 2,
                 lng: point.lng + (Math.random() - 0.5) * 0.02,
             },
             meetupUsers: [],
             description: `Сгенерированный инцидент ${i + 1}`,
+            situation: ``,
         });
     }
     return saveIncidents(incidents);
