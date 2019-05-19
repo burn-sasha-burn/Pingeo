@@ -160,6 +160,7 @@ namespace UrbaBot
                     await client.ShowMy(myIncidents, chatId);
 
                     break;
+                }
 
                 case Commands.About:
                     await client.AboutService(chatId);
@@ -172,7 +173,7 @@ namespace UrbaBot
                 case Commands.DonateCommand:
                     await client.Donate(chatId);
                     break;
-                }
+
                 default:
                     switch (userState.Command)
                     {

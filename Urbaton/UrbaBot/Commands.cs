@@ -7,7 +7,7 @@ using UrbaBase.Documents;
 
 namespace UrbaBot
 {
-    public static class Commands
+    public static partial class Commands
     {
         public const string Start = "/start";
         public const string Create = "/create";
