@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Documents\IncidentDocument.cs" />
+    <Compile Include="Documents\UserStateDocument.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\LocationDocument.cs" />
     <Compile Include="Models\StatusDocument.cs" />
@@ -104,6 +105,8 @@
     <Compile Include="Repositories\IFilesRepo.cs" />
     <Compile Include="Repositories\IIncidentsRepo.cs" />
     <Compile Include="Repositories\IncidentsRepo.cs" />
+    <Compile Include="Repositories\IUserStateRepo.cs" />
+    <Compile Include="Repositories\UserStateRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
