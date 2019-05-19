@@ -207,7 +207,6 @@
     <Content Include="Content\dist\css\app.css" />
     <Content Include="Content\dist\js\app.js" />
     <Content Include="Content\domain\IGeneralEditInfo.ts" />
-    <Content Include="Content\domain\IImage.ts" />
     <Content Include="Content\domain\IIncident.ts" />
     <Content Include="Content\domain\IMapInfo.ts" />
     <Content Include="Content\domain\IPoint.ts" />

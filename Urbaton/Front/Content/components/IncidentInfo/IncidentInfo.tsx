@@ -37,7 +37,7 @@ export function IncidentInfo({incident, onClose, onToMap}: IIncidentInfoProps) {
                 <IncidentStatus status={incident.status}/>
                 {meetupUsersCount > 0 && (
                     <span className={styles.meetupUsers}>
-                        Учавствует {meetupUsersCount}{' '}
+                        Участвует {meetupUsersCount}{' '}
                         {getWordForm(meetupUsersCount, 'человек', 'человека', 'человек')}
                     </span>
                 )}
@@ -50,14 +50,14 @@ export function IncidentInfo({incident, onClose, onToMap}: IIncidentInfoProps) {
                     </Hint>
                 </p>
                 <p>
-                    Описание: {incident.description}
+                    Описание: {incident.description} {incident.situation}
                 </p>
                 {incident.status === IStatus.New && (
                     <Link href={`https://t.me/PingeoBot?start=${incident.id}`}>Создать мероприятие</Link>
                 )}
-                {incident.image && (
+                {incident.fileId && (
                     <div className={styles.image}>
-                        <IncidentImage image={incident.image}/>
+                        <IncidentImage fileId={incident.fileId}/>
                     </div>
                 )}
             </div>

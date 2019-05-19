@@ -1,11 +1,10 @@
-import {IImage} from 'domain/IImage';
 import * as React from 'react';
 import styles from './IncidentImage.scss';
 
 interface IIncidentImagesProps {
-    image: IImage;
+    fileId: string;
 }
 
-export function IncidentImage({image}: IIncidentImagesProps) {
-    return <img className={styles.photo} src={`/api/files?fileId=${image.fileId}`} alt="Фотография инцидента"/>;
+export function IncidentImage({fileId}: IIncidentImagesProps) {
+    return <img className={styles.photo} src={`/api/files?fileId=${fileId}`} alt="Фотография инцидента"/>;
 }
