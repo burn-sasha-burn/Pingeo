@@ -77,7 +77,7 @@ namespace Front.Api
                 Status = StatusDocument.New
             };
 
-            var result = _incidentRepo.Save(incident);
+            var result = _incidentRepo.Upsert(incident);
 
             return Request.CreateResponse(HttpStatusCode.OK);
         }
