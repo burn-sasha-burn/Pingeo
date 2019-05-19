@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types.ReplyMarkups;
 using UrbaBase.Documents;
 using UrbaBase.Models;
 using UrbaBase.Repositories;
@@ -35,9 +34,9 @@ namespace UrbaBot
             if (text.Contains(':'))
             {
                 var rule = text.Split(':');
-                if (rule.Length == 2 && Guid.TryParse(rule[1], out var id))
+                if (rule.Length == 2)
                 {
-                    await HandleWithId(message, rule[0], id);
+                    await HandleParametrized(message, rule[0], rule[1]);
                 }
                 else
                 {
@@ -50,7 +49,7 @@ namespace UrbaBot
             }
         }
 
-        private async Task HandleWithId(Message message, string text, Guid id)
+        private async Task HandleParametrized(Message message, string text, string parameter)
         {
             var client = _telegramBot.Client;
             var userState = _userStateRepo.Get(message.From.Id);
@@ -58,19 +57,72 @@ namespace UrbaBot
 
             switch (text)
             {
-                case Commands.Event:
-                    userState.Command = Commands.Event;
-                    _userStateRepo.Update(userState);
+                case Commands.Problem:
+                    userState.Command = Commands.Problem;
+                    userState.IncidentId = Guid.Parse(parameter);
+                    _userStateRepo.Upsert(userState);
+                    await client.CreateIncidentDescription(chatId, parameter);
                     break;
-                default:
-                    switch (userState.Command)
+                case Commands.Event:
+                    if (_incidentRepo.Get(parameter) != null)
                     {
-                        case Commands.Event:
-
-                            break;
+                        await client.CreateMsg(chatId, "Это мероприятие уже создано");
+                        await client.CreateIncidentDescription(chatId, parameter);
+                        return;
                     }
 
+                    userState.Command = Commands.Event;
+                    userState.IncidentId = Guid.Parse(parameter);
+                    _userStateRepo.Upsert(userState);
+                    await client.CreateDate(chatId);
                     break;
+                case Commands.Date:
+                    userState.DateTime = DateTime.Today.AddDays(int.Parse(parameter));
+                    _userStateRepo.Upsert(userState);
+                    await client.CreateTime(chatId);
+                    break;
+                case Commands.Time:
+                    userState.DateTime = DateTime.Today.AddHours(int.Parse(parameter));
+                    _userStateRepo.Upsert(userState);
+                    await client.CreateText(chatId);
+                    break;
+                case Commands.Subscribe:
+                {
+                    var nick = message.From.Username;
+                    var incident = _incidentRepo.Get(parameter);
+                    if (incident.MeetupUsers.Any(user => user.Nick == nick))
+                    {
+                        await client.CreateMsg(chatId, "Вы уже подписаны на это мериприятие");
+                        await client.CreateIncidentDescription(chatId, parameter);
+                        return;
+                    }
+
+                    userState.Command = Commands.Subscribe;
+                    userState.IncidentId = Guid.Parse(parameter);
+                    _userStateRepo.Upsert(userState);
+                    incident.MeetupUsers.Add(new UserDocument {Nick = nick});
+                    _incidentRepo.Upsert(incident);
+                    await client.CreateIncidentDescription(chatId, parameter);
+                    break;
+                }
+                case Commands.Report:
+                {
+                    var nick = message.From.Username;
+                    var incident = _incidentRepo.Get(parameter);
+                    var meetupUser = incident.MeetupUsers.FirstOrDefault(user => user.Nick == nick);
+                    if (meetupUser == null)
+                    {
+                        await client.CreateMsg(chatId, "Вы не подписаны на это мериприятие");
+                        await client.CreateIncidentDescription(chatId, parameter);
+                        return;
+                    }
+
+                    userState.Command = Commands.Report;
+                    userState.IncidentId = Guid.Parse(parameter);
+                    _userStateRepo.Upsert(userState);
+                    await client.CreatePhoto(chatId);
+                    break;
+                }
             }
         }
 
@@ -90,9 +142,9 @@ namespace UrbaBot
                     break;
 
                 case Commands.Create:
-                    await client.CreatePhoto(chatId);
                     userState.Command = Commands.Create;
-                    _userStateRepo.Update(userState);
+                    _userStateRepo.Upsert(userState);
+                    await client.CreatePhoto(chatId);
                     break;
 
                 default:
@@ -106,7 +158,7 @@ namespace UrbaBot
                                 var bytes = await _telegramBot.DownloadFile(fileId);
                                 await _filesRepo.Save(fileId, bytes);
                                 userState.FileId = fileId;
-                                _userStateRepo.Update(userState);
+                                _userStateRepo.Upsert(userState);
                             }
 
                             if (string.IsNullOrEmpty(userState.FileId))
@@ -122,7 +174,7 @@ namespace UrbaBot
                                     Latitude = message.Location.Latitude,
                                     Longitude = message.Location.Longitude,
                                 };
-                                _userStateRepo.Update(userState);
+                                _userStateRepo.Upsert(userState);
                             }
 
                             if (userState.Location == null)
@@ -134,42 +186,85 @@ namespace UrbaBot
                             if (!string.IsNullOrEmpty(text))
                             {
                                 userState.Text = text;
-                                _userStateRepo.Update(userState);
+                                _userStateRepo.Upsert(userState);
                             }
 
                             if (string.IsNullOrEmpty(userState.Text))
                             {
-                                await client.CreateDescription(chatId);
+                                await client.CreateText(chatId);
                                 return;
                             }
 
                             var incidentId = Guid.NewGuid();
-                            _incidentRepo.Save(new IncidentDocument
+                            var user = new UserDocument
+                            {
+                                Nick = message.From.Username
+                            };
+
+                            _incidentRepo.Upsert(new IncidentDocument
                             {
                                 Id = incidentId,
                                 Situation = userState.Text,
                                 Location = userState.Location,
                                 Status = StatusDocument.New,
-                                Creator = new UserDocument
-                                {
-                                    Nick = message.From.Username
-                                },
-                                FileId = userState.FileId
+                                Creator = user,
+                                FileId = userState.FileId,
+                                MeetupUsers = {user}
                             });
 
                             await client.CreateEvent(chatId, incidentId);
 
                             break;
+
+                        case Commands.Event:
+                            var incident = _incidentRepo.Get(userState.IncidentId.ToString());
+                            incident.DateTime = userState.DateTime;
+                            incident.Description = text;
+                            incident.Status = StatusDocument.Process;
+                            _incidentRepo.Upsert(incident);
+                            break;
+
+                        case Commands.Report:
+                            var reportPhotos = message.Photo;
+                            if (reportPhotos?.Length > 0)
+                            {
+                                var fileId = reportPhotos[reportPhotos.Length - 1].FileId;
+                                var bytes = await _telegramBot.DownloadFile(fileId);
+                                await _filesRepo.Save(fileId, bytes);
+                                userState.FileId = fileId;
+                                _userStateRepo.Upsert(userState);
+                            }
+
+                            if (string.IsNullOrEmpty(userState.FileId))
+                            {
+                                await client.CreatePhoto(chatId);
+                                return;
+                            }
+
+                            if (!string.IsNullOrEmpty(text))
+                            {
+                                userState.Text = text;
+                                _userStateRepo.Upsert(userState);
+                            }
+
+                            if (string.IsNullOrEmpty(userState.Text))
+                            {
+                                await client.CreateText(chatId);
+                                return;
+                            }
+
+
+                            break;
                     }
 
 
-                    const string usage = @"
-                    Usage:
-                    /start   - Начать общение
-                    /create - Создать индицент
-                    /show    - Посмотреть индиценты";
-
-                    await client.SendTextMessageAsync(chatId, usage, replyMarkup: new ReplyKeyboardRemove());
+//                    const string usage = @"
+//                    Usage:
+//                    /start   - Начать общение
+//                    /create - Создать индицент
+//                    /show    - Посмотреть индиценты";
+//
+//                    await client.SendTextMessageAsync(chatId, usage, replyMarkup: new ReplyKeyboardRemove());
                     break;
             }
         }

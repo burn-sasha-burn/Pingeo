@@ -39,6 +39,6 @@ namespace UrbaBase.Documents
         public string FileId { get; set; }
 
         [JsonProperty("meetupUsers")]
-        public IEnumerable<UserDocument> MeetupUsers { get; set; }
+        public ICollection<UserDocument> MeetupUsers { get; set; }
     }
 }

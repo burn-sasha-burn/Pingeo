@@ -14,6 +14,16 @@ namespace UrbaBot
         public const string Achieve = "/achieve";
         public const string About = "/about";
         public const string Event = "/event";
+        public const string Date = "/date";
+        public const string Time = "/time";
+        public const string Problem = "/problem";
+        public const string Subscribe = "/subscribe";
+        public const string Report = "/report";
+
+        public static async Task CreateMsg(this ITelegramBotClient client, long chatId, string text)
+        {
+            await client.SendTextMessageAsync(chatId, text);
+        }
 
         public static async Task HandleStart(this ITelegramBotClient client, long chatId)
         {
@@ -43,7 +53,7 @@ namespace UrbaBot
             await client.SendTextMessageAsync(chatId, "Отметьте местоположение", replyMarkup: requestReplyKeyboard);
         }
 
-        public static async Task CreateDescription(this ITelegramBotClient client, long chatId)
+        public static async Task CreateText(this ITelegramBotClient client, long chatId)
         {
             await client.SendTextMessageAsync(chatId, "Введите описание");
         }
@@ -61,7 +71,7 @@ namespace UrbaBot
             await client.SendTextMessageAsync(chatId, string.Empty, replyMarkup: inlineKeyboard);
         }
 
-        public static async Task CreateDay(this ITelegramBotClient client, long chatId)
+        public static async Task CreateDate(this ITelegramBotClient client, long chatId)
         {
             var dateTime = DateTime.Today;
 
@@ -69,14 +79,44 @@ namespace UrbaBot
             {
                 new[]
                 {
-                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(1).Day.ToString(), "/day:1"),
-                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(2).Day.ToString(), "/day:2"),
-                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(3).Day.ToString(), "/day:3"),
-                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(4).Day.ToString(), "/day:4")
+                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(1).Day.ToString(), "/date:1"),
+                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(2).Day.ToString(), "/date:2"),
+                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(3).Day.ToString(), "/date:3"),
+                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(4).Day.ToString(), "/date:4")
                 }
             });
 
-            await client.SendTextMessageAsync(chatId, "Как дела в городе?", replyMarkup: inlineKeyboard);
+            await client.SendTextMessageAsync(chatId, "Выбирите дату", replyMarkup: inlineKeyboard);
+        }
+
+        public static async Task CreateTime(this ITelegramBotClient client, long chatId)
+        {
+            var inlineKeyboard = new InlineKeyboardMarkup(new[]
+            {
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData("09:00", "/time:09"),
+                    InlineKeyboardButton.WithCallbackData("12:00", "/time:12"),
+                    InlineKeyboardButton.WithCallbackData("15:00", "/time:15"),
+                    InlineKeyboardButton.WithCallbackData("18:00", "/time:18")
+                }
+            });
+
+            await client.SendTextMessageAsync(chatId, "Выбирите время", replyMarkup: inlineKeyboard);
+        }
+
+        public static async Task CreateIncidentDescription(this ITelegramBotClient client, long chatId, string incidentId)
+        {
+            var inlineKeyboard = new InlineKeyboardMarkup(new[]
+            {
+                new[]
+                {
+                    InlineKeyboardButton.WithCallbackData("Пойти на мероприятие", $"{Subscribe}:{incidentId}"),
+                    InlineKeyboardButton.WithCallbackData("Отправить отчёт", $"{Report}:{incidentId}")
+                }
+            });
+
+            await client.SendTextMessageAsync(chatId, string.Empty, replyMarkup: inlineKeyboard);
         }
     }
 }
