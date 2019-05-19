@@ -1,6 +1,6 @@
 import CrossIcon from '@skbkontur/react-icons/Delete';
 import {Coordinate} from 'components/Coordinate/Coordinate';
-import {IncidentImages} from 'components/IncidentImages/IncidentImages';
+import {IncidentImage} from 'components/IncidentImage/IncidentImage';
 import {IncidentStatus} from 'components/IncidentStatus/IncidentStatus';
 import {IIncident} from 'domain/IIncident';
 import {IPoint} from 'domain/IPoint';
@@ -52,13 +52,14 @@ export function IncidentInfo({incident, onClose, onToMap}: IIncidentInfoProps) {
                 <p>
                     Описание: {incident.description}
                 </p>
-                <p>
-                    customText: {incident.customText}
-                </p>
                 {incident.status === IStatus.New && (
                     <Link href="https://t.me/UrbaBurbaBot?start">Создать мероприятие</Link>
                 )}
-                <IncidentImages images={incident.images}/>
+                {incident.image && (
+                    <div className={styles.image}>
+                        <IncidentImage image={incident.image}/>
+                    </div>
+                )}
             </div>
         </div>
     );

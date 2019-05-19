@@ -10,6 +10,6 @@ export const meetupsRoute: Page = 'meetups';
 
 export const pages: Page[] = [incidentsRoute, meetupsRoute];
 export const pagesInfo: IPageInfo[] = [
-    {page: incidentsRoute, title: 'Все инциденты'},
+    {page: incidentsRoute, title: 'Инциденты'},
     {page: meetupsRoute, title: 'Мероприятия'},
 ];

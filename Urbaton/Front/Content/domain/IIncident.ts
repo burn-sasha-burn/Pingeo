@@ -10,7 +10,7 @@ export interface IIncident {
     status: IStatus;
     creationDate: string;
     creator: IUser;
-    images: IImage[];
+    image: IImage;
     meetupUsers: IUser[];
     customText: string;
 }
