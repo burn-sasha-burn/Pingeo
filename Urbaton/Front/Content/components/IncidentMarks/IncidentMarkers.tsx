@@ -1,6 +1,7 @@
 import {initializeIncidentMarkers} from 'components/IncidentMarks/incidentMarkersUtils';
 import {LBroomMarker} from 'components/Map/LBroomMarker';
 import {LFireMarker} from 'components/Map/LFireMarker';
+import {LOkMarker} from 'components/Map/LOkMarker';
 import {IIncident} from 'domain/IIncident';
 import {IStatus} from 'domain/IStatus';
 import {Map} from 'leaflet';
@@ -39,10 +40,26 @@ class IncidentMarksComponent extends React.PureComponent<IIncidentMarkersProps> 
         return (
             <>
                 {incidents.map((incident) => {
-                    if (incident.status === IStatus.Finished) {
+                    let LMarker = null;
+
+                    switch (incident.status) {
+                        case IStatus.New: {
+                            LMarker = LFireMarker;
+                            break;
+                        }
+                        case IStatus.Process: {
+                            LMarker = LBroomMarker;
+                            break;
+                        }
+                        case IStatus.Finished: {
+                            LMarker = LOkMarker;
+                            break;
+                        }
+                    }
+
+                    if (!LMarker) {
                         return null;
                     }
-                    const LMarker = incident.status === IStatus.Process ? LBroomMarker : LFireMarker;
                     return (
                         <LMarker
                             key={incident.id}

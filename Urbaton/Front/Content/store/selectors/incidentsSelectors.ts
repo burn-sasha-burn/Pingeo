@@ -14,10 +14,12 @@ export const filteredIncidentsSelector = createSelector(
     [incidentsByIdSelector, pathInfoSelector],
     (incidentsById, pathInfo) => {
         if (pathInfo.page === incidentsRoute) {
-            return Object.values(incidentsById).filter((incident) => incident.status === IStatus.New);
+            return Object.values(incidentsById)
+                .filter((incident) => incident.status === IStatus.New || incident.status === IStatus.Finished);
         }
         if (pathInfo.page === meetupsRoute) {
-            return Object.values(incidentsById).filter((incident) => incident.status === IStatus.Process);
+            return Object.values(incidentsById)
+                .filter((incident) => incident.status === IStatus.Process || incident.status === IStatus.Finished);
         }
         return [];
     },

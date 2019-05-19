@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
+using UrbaBase.Documents;
 
 namespace UrbaBot
 {
@@ -79,6 +81,22 @@ namespace UrbaBot
             });
 
             await client.SendTextMessageAsync(chatId, "Как дела в городе?", replyMarkup: inlineKeyboard);
+        }
+
+        public static async Task ShowMy(this ITelegramBotClient client, IEnumerable<IncidentDocument> incidents, long chatId)
+        {
+            
+            List<InlineKeyboardButton> incidentButtonsList = new List<InlineKeyboardButton>();
+
+            foreach (var i in incidents)
+            {
+                InlineKeyboardButton inlineKeyboardButton = InlineKeyboardButton.WithCallbackData(i.DateTime.ToShortDateString(), $"/problem {i.Id}");
+                incidentButtonsList.Add(inlineKeyboardButton);
+            }
+
+            InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup(incidentButtonsList);
+
+            await client.SendTextMessageAsync(chatId, "Как дела в городе?", replyMarkup: inlineKeyboardMarkup);
         }
     }
 }
