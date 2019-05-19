@@ -28,9 +28,9 @@ namespace UrbaBot
             _incidentRepo = incidentRepo;
         }
 
-        public async Task ReceiveText(Message message)
+        public async Task ReceiveText(Message message, CallbackQuery callbackQuery = null)
         {
-            var text = message.Text.ToLower();
+            var text = !string.IsNullOrEmpty(message.Text) ? message.Text : callbackQuery?.Data;
 
             if (text.Contains(':'))
             {
