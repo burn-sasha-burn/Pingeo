@@ -28,7 +28,7 @@ $largePadding: 24px;
   position: sticky;
   width: 100%;
   top: 0;
-  padding: $largePadding;
+  padding: $padding $largePadding;
   box-sizing: border-box;
   display: flex;
   flex-flow: row nowrap;
@@ -58,4 +58,9 @@ $largePadding: 24px;
 
 .meetupUsers {
   margin-left: 12px;
+}
+
+.image {
+  text-align: center;
+  margin-top: 8px;
 }

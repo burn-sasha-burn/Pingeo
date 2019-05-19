@@ -177,8 +177,8 @@
     <Content Include="Content\components\DivIcons\BroomDivIcon.tsx" />
     <Content Include="Content\components\DivIcons\FireDivIcon.tsx" />
     <Content Include="Content\components\DivIcons\FireIconFocused.tsx" />
-    <Content Include="Content\components\IncidentImages\IncidentImages.scss" />
-    <Content Include="Content\components\IncidentImages\IncidentImages.tsx" />
+    <Content Include="Content\components\IncidentImage\IncidentImage.scss" />
+    <Content Include="Content\components\IncidentImage\IncidentImage.tsx" />
     <Content Include="Content\components\IncidentInfoBackplate\IncidentInfoBackplate.scss" />
     <Content Include="Content\components\IncidentInfoBackplate\IncidentInfoBackplate.tsx" />
     <Content Include="Content\components\IncidentInfo\IncidentInfo.scss" />

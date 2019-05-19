@@ -3,7 +3,7 @@ import {incidentsRoute, meetupsRoute, Page, pages} from 'utils/constants/routesC
 
 export const buildPageRoute = (page: Page) => `/${page}`;
 export const buildIncidentsRoute = () => `/${incidentsRoute}`;
-export const buildMyMeetsRoute = () => `/${meetupsRoute}`;
+export const buildMeetupsRoute = () => `/${meetupsRoute}`;
 
 export function buildSelectedIncidentRoute(location: Location, incidentId: string): string {
     return `${buildCurrentPageRoute(location)}/${incidentId}`;
