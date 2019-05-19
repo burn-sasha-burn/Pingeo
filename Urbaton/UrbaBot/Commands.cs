@@ -21,6 +21,8 @@ namespace UrbaBot
         public const string Problem = "/problem";
         public const string Subscribe = "/subscribe";
         public const string Report = "/report";
+        public const string DonateCommand = "/donate";
+        public const string SponsorCommand = "/sponsor";
 
         public static async Task CreateMsg(this ITelegramBotClient client, long chatId, string text)
         {
