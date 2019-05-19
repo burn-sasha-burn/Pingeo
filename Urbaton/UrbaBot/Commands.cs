@@ -67,19 +67,6 @@ namespace UrbaBot
             await client.SendTextMessageAsync(chatId, "Введите описание");
         }
 
-        public static async Task CreateEvent(this ITelegramBotClient client, long chatId, Guid incidentId)
-        {
-            var inlineKeyboard = new InlineKeyboardMarkup(new[]
-            {
-                new[]
-                {
-                    InlineKeyboardButton.WithCallbackData("Создать мероприятие", $"{Event}:{incidentId}")
-                }
-            });
-
-            await client.SendTextMessageAsync(chatId, string.Empty, replyMarkup: inlineKeyboard);
-        }
-
         public static async Task CreateDate(this ITelegramBotClient client, long chatId)
         {
             var dateTime = DateTime.Today;
@@ -120,22 +107,22 @@ namespace UrbaBot
             {
                 new[]
                 {
-                    InlineKeyboardButton.WithCallbackData("Пойти на мероприятие", $"{Subscribe}:{incidentId}"),
-                    InlineKeyboardButton.WithCallbackData("Отправить отчёт", $"{Report}:{incidentId}")
+                    InlineKeyboardButton.WithCallbackData("Создать мероприятие", $"{Event}_{incidentId}"),
+                    InlineKeyboardButton.WithCallbackData("Пойти на мероприятие", $"{Subscribe}_{incidentId}"),
+                    InlineKeyboardButton.WithCallbackData("Отправить отчёт", $"{Report}_{incidentId}")
                 }
             });
 
-            await client.SendTextMessageAsync(chatId, string.Empty, replyMarkup: inlineKeyboard);
+            await client.SendTextMessageAsync(chatId, "ИНЦИДЕ́НТ", replyMarkup: inlineKeyboard);
         }
 
         public static async Task ShowMy(this ITelegramBotClient client, IEnumerable<IncidentDocument> incidents, long chatId)
         {
-
             List<InlineKeyboardButton> incidentButtonsList = new List<InlineKeyboardButton>();
 
             foreach (var i in incidents)
             {
-                InlineKeyboardButton inlineKeyboardButton = InlineKeyboardButton.WithCallbackData(i.DateTime.ToShortDateString(), $"/problem:{i.Id}");
+                InlineKeyboardButton inlineKeyboardButton = InlineKeyboardButton.WithCallbackData(i.DateTime?.ToShortDateString(), $"{Problem}_{i.Id}");
                 incidentButtonsList.Add(inlineKeyboardButton);
             }
 

@@ -1,4 +1,5 @@
 import {IMapInfo} from 'domain/IMapInfo';
+import {IPoint} from 'domain/IPoint';
 import * as L from 'leaflet';
 import {Map} from 'leaflet';
 import * as React from 'react';
@@ -8,6 +9,7 @@ import styles from './LMap.scss';
 interface IRMapProps {
     children?: ReactNode;
     mapInfo?: IMapInfo;
+    onViewSet?: (center: IPoint) => void;
 }
 
 interface IRMapState {
@@ -31,6 +33,13 @@ export class LMap extends React.Component<IRMapProps, IRMapState> {
         if (this.mapRef && this.mapRef.current) {
             this.map = L.map(this.mapRef.current);
             this.setState({initialized: true});
+
+            // Грубо, но времени уже мало
+            setTimeout(() => {
+                if (this.props.onViewSet) {
+                    this.props.onViewSet(this.map.getCenter());
+                }
+            }, 1500);
         }
     }
 
