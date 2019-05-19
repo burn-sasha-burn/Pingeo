@@ -96,8 +96,12 @@ namespace UrbaBot
                     break;
 
                 case Commands.My:
-                    var myIncidents = _incidentRepo.Get().Where(x => x.Creator.Nick == message.From.Username);
-                    await client.ShowMy(myIncidents, chatId);
+                    await client.ShowMy(_incidentRepo.Get().Where(x => x.Creator.Nick == message.From.Username), chatId);
+
+                    break;
+
+                case Commands.Achieve:
+                    await client.ShowAchieve(_incidentRepo.Get().Where(x => x.Creator.Nick == message.From.Username), chatId);
 
                     break;
 

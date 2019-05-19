@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot;
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.InputFiles;
 using Telegram.Bot.Types.ReplyMarkups;
 using UrbaBase.Documents;
+using UrbaBase.Models;
 
 namespace UrbaBot
 {
@@ -83,18 +88,32 @@ namespace UrbaBot
 
         public static async Task ShowMy(this ITelegramBotClient client, IEnumerable<IncidentDocument> incidents, long chatId)
         {
-            
+
             List<InlineKeyboardButton> incidentButtonsList = new List<InlineKeyboardButton>();
 
             foreach (var i in incidents)
             {
-                InlineKeyboardButton inlineKeyboardButton = InlineKeyboardButton.WithCallbackData(i.DateTime.ToShortDateString(), $"/problem {i.Id}");
+                InlineKeyboardButton inlineKeyboardButton = InlineKeyboardButton.WithCallbackData(i.DateTime.ToShortDateString(), $"/problem:{i.Id}");
                 incidentButtonsList.Add(inlineKeyboardButton);
             }
 
             InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup(incidentButtonsList);
 
             await client.SendTextMessageAsync(chatId, "Как дела в городе?", replyMarkup: inlineKeyboardMarkup);
+        }
+
+        public static async Task ShowAchieve(this ITelegramBotClient client, IEnumerable<IncidentDocument> incidents, long chatId)
+        {
+            var incidentDocuments = incidents.ToList();
+            if (incidentDocuments.Count() >= 10)
+            {
+                await client.SendTextMessageAsync(chatId, "Соколиный Глаз - великолепный помощник ЖКХ служб. Он использует разные виды приспособлений, различными эффектами и характеристиками. Он способен вести беспощадную борьбу с мусорной несправедливостью в любимом городе, находя даже малоразмерные мусорные пакеты на дальних расстояниях. Будучи Соколиным глазом, он тренировался ежедневно, не менее двух часов в день, чтобы поддерживать свои навыки.");
+            }
+
+            if (incidentDocuments.Count(x => x.Status == StatusDocument.Process) >= 5)
+            {
+                await client.SendTextMessageAsync(chatId, "Капитан Активист - имеет обширную подготовку для борьбы с беспределом ЖКХ и часто был даже знаком с первыми лицами, отвественными за порядок в городе. Он эксперт по уборке и организации мероприятий по очистке местности, владеет навыками управления различным транспортом для уборки территории. Также имеет много знакомых, благодаря которым способен в кратчайшие сроки собирать большие группы людей для зачистки территории в течение очень непродолжительного времени. Работает на организацию Щ.И.Т. Время от времени он пробует себя в области «мирской» карьеры, включая прикладные искусства, рисование графити, образование (история уборочной техники) и правоприменительную деятельность.");
+            }
         }
     }
 }
