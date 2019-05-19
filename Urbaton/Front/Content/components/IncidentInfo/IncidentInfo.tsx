@@ -4,11 +4,13 @@ import {IncidentImages} from 'components/IncidentImages/IncidentImages';
 import {IncidentStatus} from 'components/IncidentStatus/IncidentStatus';
 import {IIncident} from 'domain/IIncident';
 import {IPoint} from 'domain/IPoint';
+import {IStatus} from 'domain/IStatus';
 import * as React from 'react';
 import Button from 'retail-ui/components/Button/Button';
 import Hint from 'retail-ui/components/Hint/Hint';
 import Link from 'retail-ui/components/Link/Link';
 import {toDateTimeStr} from 'utils/dateUtils';
+import {getWordForm} from 'utils/getWordForm';
 import styles from './IncidentInfo.scss';
 
 interface IIncidentInfoProps {
@@ -21,6 +23,7 @@ export function IncidentInfo({incident, onClose, onToMap}: IIncidentInfoProps) {
     if (!incident) {
         return null;
     }
+    const meetupUsersCount = incident.meetupUsers.length;
 
     return (
         <div className={styles.incident}>
@@ -32,6 +35,12 @@ export function IncidentInfo({incident, onClose, onToMap}: IIncidentInfoProps) {
             </div>
             <div className={styles.incidentInfo}>
                 <IncidentStatus status={incident.status}/>
+                {meetupUsersCount > 0 && (
+                    <span className={styles.meetupUsers}>
+                        Учавствует {meetupUsersCount}{' '}
+                        {getWordForm(meetupUsersCount, 'человек', 'человека', 'человек')}
+                    </span>
+                )}
                 <p>
                     <span>Место:</span>{' '}
                     <Hint text="Перейти к карте">
@@ -46,7 +55,9 @@ export function IncidentInfo({incident, onClose, onToMap}: IIncidentInfoProps) {
                 <p>
                     customText: {incident.customText}
                 </p>
-                <Link href="https://t.me/UrbaBurbaBot?start">Создать мероприятие</Link>
+                {incident.status === IStatus.New && (
+                    <Link href="https://t.me/UrbaBurbaBot?start">Создать мероприятие</Link>
+                )}
                 <IncidentImages images={incident.images}/>
             </div>
         </div>
