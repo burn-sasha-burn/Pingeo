@@ -95,6 +95,12 @@ namespace UrbaBot
                     _userStateRepo.Update(userState);
                     break;
 
+                case Commands.My:
+                    var myIncidents = _incidentRepo.Get().Where(x => x.Creator.Nick == message.From.Username);
+                    await client.ShowMy(myIncidents, chatId);
+
+                    break;
+
                 default:
                     switch (userState.Command)
                     {
@@ -162,12 +168,12 @@ namespace UrbaBot
                             break;
                     }
 
-
                     const string usage = @"
                     Usage:
                     /start   - Начать общение
                     /create - Создать индицент
-                    /show    - Посмотреть индиценты";
+                    /show    - Посмотреть индиценты
+                    /my - Мои инциденты и мероприятия";
 
                     await client.SendTextMessageAsync(chatId, usage, replyMarkup: new ReplyKeyboardRemove());
                     break;
