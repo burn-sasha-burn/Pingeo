@@ -53,7 +53,7 @@ export function IncidentInfo({incident, onClose, onToMap}: IIncidentInfoProps) {
                     Описание: {incident.description}
                 </p>
                 {incident.status === IStatus.New && (
-                    <Link href="https://t.me/UrbaBurbaBot?start">Создать мероприятие</Link>
+                    <Link href={`https://t.me/UrbaBurbaBot?start=${incident.id}`}>Создать мероприятие</Link>
                 )}
                 {incident.image && (
                     <div className={styles.image}>
