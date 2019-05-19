@@ -147,6 +147,12 @@ namespace UrbaBot
                     await client.CreatePhoto(chatId);
                     break;
 
+                case Commands.My:
+                    var myIncidents = _incidentRepo.Get().Where(x => x.Creator.Nick == message.From.Username);
+                    await client.ShowMy(myIncidents, chatId);
+
+                    break;
+
                 default:
                     switch (userState.Command)
                     {
@@ -246,7 +252,7 @@ namespace UrbaBot
                                 userState.Text = text;
                                 _userStateRepo.Upsert(userState);
                             }
-
+                            
                             if (string.IsNullOrEmpty(userState.Text))
                             {
                                 await client.CreateText(chatId);
@@ -254,17 +260,14 @@ namespace UrbaBot
                             }
 
 
-                            break;
-                    }
+                            const string usage = @"
+                    Usage:
+                    /start   - Начать общение
+                    /create - Создать индицент
+                    /show    - Посмотреть индиценты
+                    /my - Мои инциденты и мероприятия";
 
-
-//                    const string usage = @"
-//                    Usage:
-//                    /start   - Начать общение
-//                    /create - Создать индицент
-//                    /show    - Посмотреть индиценты";
-//
-//                    await client.SendTextMessageAsync(chatId, usage, replyMarkup: new ReplyKeyboardRemove());
+                    await client.SendTextMessageAsync(chatId, usage, replyMarkup: new ReplyKeyboardRemove());
                     break;
             }
         }
