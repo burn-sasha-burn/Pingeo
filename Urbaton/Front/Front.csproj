@@ -177,6 +177,7 @@
     <Content Include="Content\components\DivIcons\BroomDivIcon.tsx" />
     <Content Include="Content\components\DivIcons\FireDivIcon.tsx" />
     <Content Include="Content\components\DivIcons\FireIconFocused.tsx" />
+    <Content Include="Content\components\DivIcons\OkDivIcon.ts" />
     <Content Include="Content\components\IncidentImage\IncidentImage.scss" />
     <Content Include="Content\components\IncidentImage\IncidentImage.tsx" />
     <Content Include="Content\components\IncidentInfoBackplate\IncidentInfoBackplate.scss" />
@@ -194,6 +195,7 @@
     <Content Include="Content\components\Map\LMap.tsx" />
     <Content Include="Content\components\Map\LMapContainer.tsx" />
     <Content Include="Content\components\Map\LMarker.tsx" />
+    <Content Include="Content\components\Map\LOkMarker.tsx" />
     <Content Include="Content\components\Map\LTileLayer.tsx" />
     <Content Include="Content\components\Map\LZoomControl.tsx" />
     <Content Include="Content\components\OptionsBar\OptionsBar.scss" />
