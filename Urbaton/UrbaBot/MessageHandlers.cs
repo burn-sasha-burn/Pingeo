@@ -28,9 +28,9 @@ namespace UrbaBot
             _incidentRepo = incidentRepo;
         }
 
-        public async Task ReceiveText(Message message)
+        public async Task ReceiveText(Message message, CallbackQuery callbackQuery = null)
         {
-            var text = message?.Text?.ToLower();
+            var text = message?.Text?.ToLower() ?? callbackQuery?.Data;
 
             if (text?.Contains('_') ?? false)
             {
@@ -154,13 +154,12 @@ namespace UrbaBot
                     break;
 
                 case Commands.My:
-                {
-                    var nick = message.From.Username;
-                    var myIncidents = _incidentRepo.Get().Where(x => x.Creator.Nick == nick);
-                    await client.ShowMy(myIncidents, chatId);
-
+                    await client.ShowMy(_incidentRepo.Get().Where(x => x.Creator.Nick == message.From.Username), chatId);
                     break;
-                }
+
+                case Commands.Achieve:
+                    await client.ShowAchieve(_incidentRepo.Get().Where(x => x.Creator.Nick == message.From.Username), chatId);
+                    break;
 
                 case Commands.Show:
                     await client.CreateMsg(chatId, "http://pingeo.ru");
