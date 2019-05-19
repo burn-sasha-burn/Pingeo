@@ -37,7 +37,7 @@ namespace UrbaBotService
             var message = messageEventArgs.Message;
             if (message == null || message.Type != MessageType.Text) return;
 
-            await MessageHandlers.ReceiveText(Bot, message);
+//            await MessageHandlers.ReceiveText(Bot, message);
         }
 
         private static async void BotOnCallbackQueryReceived(object sender, CallbackQueryEventArgs callbackQueryEventArgs)

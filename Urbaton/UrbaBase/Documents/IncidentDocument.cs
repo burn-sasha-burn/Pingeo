@@ -16,6 +16,9 @@ namespace UrbaBase.Documents
         [JsonProperty("id")]
         public Guid Id { get; set; }
 
+        [JsonProperty("situation")]
+        public string Situation { get; set; }
+
         [JsonProperty("description")]
         public string Description { get; set; }
 
@@ -26,19 +29,16 @@ namespace UrbaBase.Documents
         public StatusDocument Status { get; set; }
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
-        [JsonProperty("creationDate")]
-        public DateTime CreationDate { get; set; }
+        [JsonProperty("dateTime")]
+        public DateTime DateTime { get; set; }
 
         [JsonProperty("creator")]
         public UserDocument Creator { get; set; }
 
-        [JsonProperty("images")]
-        public IEnumerable<Image> Images { get; set; }
+        [JsonProperty("fileId")]
+        public string FileId { get; set; }
 
         [JsonProperty("meetupUsers")]
         public IEnumerable<UserDocument> MeetupUsers { get; set; }
-
-        [JsonProperty("customText")]
-        public string CustomText { get; set; }
     }
 }

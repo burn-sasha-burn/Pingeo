@@ -14,12 +14,17 @@ namespace UrbaBase.Repositories
 
         public UserStateDocument Get(int userId)
         {
-            return _userStateCollection.Find(x => x.UserId == userId).SingleOrDefault();
+            return _userStateCollection.Find(x => x.UserId == userId).SingleOrDefault() ?? new UserStateDocument();
         }
 
         public void Update(UserStateDocument document)
         {
             _userStateCollection.ReplaceOne(x => x.UserId == document.UserId, document, new UpdateOptions {IsUpsert = true});
+        }
+
+        public void Delete(int userId)
+        {
+            _userStateCollection.DeleteOne(x => x.UserId == userId);
         }
     }
 }

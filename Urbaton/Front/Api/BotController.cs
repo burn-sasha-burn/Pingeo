@@ -1,70 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Results;
-using Telegram.Bot.Args;
 using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
-using Telegram.Bot.Types.ReplyMarkups;
-using UrbaBase.Repositories;
 using UrbaBot;
 
 namespace Front.Api
 {
     public class BotController : ApiController
     {
-        private readonly ITelegramBot _telegramBot;
-        private readonly IFilesRepo _filesRepo;
+        private readonly IMessageHandlers _messageHandlers;
 
-        public BotController(ITelegramBot telegramBot,
-                             IFilesRepo filesRepo)
+        public BotController(IMessageHandlers messageHandlers)
         {
-            _telegramBot = telegramBot;
-            _filesRepo = filesRepo;
-            //_telegramBot.GetClient().OnMessage += BotOnMessageReceived;
-            //_telegramBot.GetClient().OnCallbackQuery += BotOnCallbackQueryReceived;
+            _messageHandlers = messageHandlers;
         }
 
         [HttpPost]
         [Route(BotSettings.HookResponse)]
-        public async Task<IHttpActionResult> Post([FromBody] Update update)
+        public async Task<HttpResponseMessage> Post([FromBody] Update update)
         {
-            var photos = update.Message.Photo;
-            if (photos != null && photos.Any())
-            {
-                var fileId = photos[photos.Length - 1].FileId;
-                var bytes = await _telegramBot.DownloadFile(fileId);
-                await _filesRepo.Save(fileId, bytes);
-            }
+            await _messageHandlers.ReceiveText(update.Message);
 
-            await MessageHandlers.ReceiveText(_telegramBot.Client, update.Message);
-
-            return Ok();
+            return new HttpResponseMessage(HttpStatusCode.OK);
         }
-
-        //private async void BotOnMessageReceived(object sender, MessageEventArgs messageEventArgs)
-        //{
-        //    if (messageEventArgs.Message.Text.ToUpper().Contains("/START"))
-        //    {
-        //        Start(messageEventArgs.Message.Chat.Id);
-        //    }
-        //}
-
-        //private async void BotOnCallbackQueryReceived(object sender, CallbackQueryEventArgs callbackQueryEventArgs)
-        //{
-        //    if (callbackQueryEventArgs.CallbackQuery.Data.Equals("/create"))
-        //    {
-
-        //    }
-        //    else if (callbackQueryEventArgs.CallbackQuery.Data.Equals("ingredients"))
-        //    {
-
-        //    }
-        //}
     }
 }
