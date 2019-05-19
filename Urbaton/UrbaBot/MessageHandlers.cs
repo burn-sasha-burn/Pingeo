@@ -162,6 +162,10 @@ namespace UrbaBot
                     break;
                 }
 
+                case Commands.Show:
+                    await client.CreateMsg(chatId, "http://pingeo.ru");
+                    break;
+
                 case Commands.About:
                     await client.AboutService(chatId);
                     break;
