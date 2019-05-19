@@ -75,10 +75,10 @@ namespace UrbaBot
             {
                 new[]
                 {
-                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(1).Day.ToString(), "/date:1"),
-                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(2).Day.ToString(), "/date:2"),
-                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(3).Day.ToString(), "/date:3"),
-                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(4).Day.ToString(), "/date:4")
+                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(1).Day.ToString(), "/date_1"),
+                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(2).Day.ToString(), "/date_2"),
+                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(3).Day.ToString(), "/date_3"),
+                    InlineKeyboardButton.WithCallbackData(dateTime.AddDays(4).Day.ToString(), "/date_4")
                 }
             });
 
@@ -91,10 +91,10 @@ namespace UrbaBot
             {
                 new[]
                 {
-                    InlineKeyboardButton.WithCallbackData("09:00", "/time:09"),
-                    InlineKeyboardButton.WithCallbackData("12:00", "/time:12"),
-                    InlineKeyboardButton.WithCallbackData("15:00", "/time:15"),
-                    InlineKeyboardButton.WithCallbackData("18:00", "/time:18")
+                    InlineKeyboardButton.WithCallbackData("09:00", "/time_09"),
+                    InlineKeyboardButton.WithCallbackData("12:00", "/time_12"),
+                    InlineKeyboardButton.WithCallbackData("15:00", "/time_15"),
+                    InlineKeyboardButton.WithCallbackData("18:00", "/time_18")
                 }
             });
 

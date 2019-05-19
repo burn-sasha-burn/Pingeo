@@ -81,7 +81,7 @@ namespace UrbaBot
                     await client.CreateIncidentDescription(chatId, parameter);
                     break;
                 case Commands.Event:
-                    if (_incidentRepo.Get(parameter) != null)
+                    if (_incidentRepo.Get(parameter)?.DateTime != null)
                     {
                         await client.CreateMsg(chatId, "Это мероприятие уже создано");
                         await client.CreateIncidentDescription(chatId, parameter);
@@ -95,7 +95,7 @@ namespace UrbaBot
                     await client.CreateDate(chatId);
                     break;
                 case Commands.Date:
-                    userState.DateTime = DateTime.Today.AddDays(int.Parse(parameter));
+                    userState.DateTime = DateTime.Today.AddDays(int.Parse(parameter) + 1);
                     _userStateRepo.Upsert(userState);
                     await client.CreateTime(chatId);
                     break;
@@ -236,7 +236,7 @@ namespace UrbaBot
                                 return;
                             }
 
-                            var incidentId = Guid.NewGuid();
+                            var incidentId = Guid.NewGuid().ToString("N");
                             var user = new UserDocument
                             {
                                 Nick = nick
@@ -244,7 +244,7 @@ namespace UrbaBot
 
                             _incidentRepo.Upsert(new IncidentDocument
                             {
-                                Id = incidentId.ToString("N"),
+                                Id = incidentId,
                                 Situation = userState.Text,
                                 Location = userState.Location,
                                 Status = StatusDocument.New,
@@ -253,7 +253,7 @@ namespace UrbaBot
                                 MeetupUsers = new[] {user}
                             });
 
-                            await client.CreateIncidentDescription(chatId, incidentId.ToString());
+                            await client.CreateIncidentDescription(chatId, incidentId);
 
                             break;
                         }
