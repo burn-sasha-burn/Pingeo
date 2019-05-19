@@ -7,6 +7,7 @@ import {IPoint} from 'domain/IPoint';
 import * as React from 'react';
 import Button from 'retail-ui/components/Button/Button';
 import Hint from 'retail-ui/components/Hint/Hint';
+import Link from 'retail-ui/components/Link/Link';
 import {toDateTimeStr} from 'utils/dateUtils';
 import styles from './IncidentInfo.scss';
 
@@ -45,6 +46,7 @@ export function IncidentInfo({incident, onClose, onToMap}: IIncidentInfoProps) {
                 <p>
                     customText: {incident.customText}
                 </p>
+                <Link href="https://t.me/UrbaBurbaBot?start">Создать мероприятие</Link>
                 <IncidentImages images={incident.images}/>
             </div>
         </div>
