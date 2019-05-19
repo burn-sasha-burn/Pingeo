@@ -69,7 +69,7 @@ namespace Front.Api
         {
             var incident = new IncidentDocument
             {
-                Id = new Guid(),
+                Id = Guid.NewGuid().ToString("N"),
                 DateTime = DateTime.UtcNow,
                 Creator = new UserDocument {Nick = "Superman"},
                 Location = new LocationDocument {Latitude = 21d, Longitude = 22d},

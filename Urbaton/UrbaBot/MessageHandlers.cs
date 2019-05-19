@@ -30,11 +30,11 @@ namespace UrbaBot
 
         public async Task ReceiveText(Message message)
         {
-            var text = message.Text.ToLower();
+            var text = message?.Text?.ToLower();
 
-            if (text.Contains(':'))
+            if (text?.Contains('_') ?? false)
             {
-                var rule = text.Split(':');
+                var rule = text.Split('_');
                 if (rule.Length == 2)
                 {
                     await HandleParametrized(message, rule[0], rule[1]);
@@ -61,7 +61,7 @@ namespace UrbaBot
             {
                 case Commands.Problem:
                     userState.Command = Commands.Problem;
-                    userState.IncidentId = Guid.Parse(parameter);
+                    userState.IncidentId = parameter;
                     _userStateRepo.Upsert(userState);
                     await client.CreateIncidentDescription(chatId, parameter);
                     break;
@@ -75,7 +75,7 @@ namespace UrbaBot
 
                     userState = new UserStateDocument {UserId = userId};
                     userState.Command = Commands.Event;
-                    userState.IncidentId = Guid.Parse(parameter);
+                    userState.IncidentId = parameter;
                     _userStateRepo.Upsert(userState);
                     await client.CreateDate(chatId);
                     break;
@@ -101,7 +101,7 @@ namespace UrbaBot
                     }
 
                     userState.Command = Commands.Subscribe;
-                    userState.IncidentId = Guid.Parse(parameter);
+                    userState.IncidentId = parameter;
                     _userStateRepo.Upsert(userState);
                     incident.MeetupUsers.Add(new UserDocument {Nick = nick});
                     _incidentRepo.Upsert(incident);
@@ -122,7 +122,7 @@ namespace UrbaBot
 
                     userState = new UserStateDocument {UserId = userId};
                     userState.Command = Commands.Report;
-                    userState.IncidentId = Guid.Parse(parameter);
+                    userState.IncidentId = parameter;
                     _userStateRepo.Upsert(userState);
                     await client.CreatePhoto(chatId);
                     break;
@@ -235,16 +235,16 @@ namespace UrbaBot
 
                             _incidentRepo.Upsert(new IncidentDocument
                             {
-                                Id = incidentId,
+                                Id = incidentId.ToString("N"),
                                 Situation = userState.Text,
                                 Location = userState.Location,
                                 Status = StatusDocument.New,
                                 Creator = user,
                                 FileId = userState.FileId,
-                                MeetupUsers = {user}
+                                MeetupUsers = new[] {user}
                             });
 
-                            await client.CreateEvent(chatId, incidentId);
+                            await client.CreateIncidentDescription(chatId, incidentId.ToString());
 
                             break;
                         }
